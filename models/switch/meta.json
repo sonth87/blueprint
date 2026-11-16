@@ -10,6 +10,6 @@
   "hotspotsLabel": "Laptop parts",
   "mark": "<b>Nintendo Switch</b><span>OLED model</span>",
   "dwg": "DWG NSW-OLED-001 &middot; Rev A<br>Units mm &middot; View az 35&deg; / el 18&deg;<br>Concept page, not affiliated with Nintendo",
-  "template": "page-a",
+  "screenHint": ", <kbd>/</kbd> for the screen",
   "screenRuntime": true
 }

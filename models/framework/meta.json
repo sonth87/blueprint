@@ -10,6 +10,6 @@
   "hotspotsLabel": "Laptop parts",
   "mark": "<b>Framework Laptop 13</b><span>Repairable</span>",
   "dwg": "DWG FW13-001 &middot; Rev A<br>Units mm &middot; View az 40&deg; / el 28&deg;<br>Concept page, not affiliated with Framework",
-  "template": "page-a",
+  "screenHint": ", <kbd>/</kbd> for the screen",
   "screenRuntime": true
 }

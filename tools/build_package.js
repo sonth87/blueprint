@@ -22,7 +22,7 @@ const VERSION = process.argv[2] || old.version || "1.0.0";
 const { load, entry } = require("./build.js");
 const { pageHtml } = require("../templates/page.js");
 const data = load();
-const models = data.models.map(m => ({ ...entry(m), html: pageHtml(data.templates[m.meta.template], m.meta,
+const models = data.models.map(m => ({ ...entry(m), html: pageHtml(data.template, m.meta,
   { geometry: { code: m.geometry }, model: { code: m.model }, engine: { code: data.engine } }) }));
 const manifest = models.map(({ id, label, kind, category, tags }) => ({ id, label, kind, category, tags }));
 

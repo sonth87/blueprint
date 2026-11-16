@@ -762,18 +762,29 @@
   let explode = 0, explodeTarget = 0, revealed = false, leaveAt = 0, touchOpen = false;
   // double-click switches from hover mode to a fixed state: null = follow hover, true = apart, false = assembled
   let manual = null, exporting = false;
+  // Two states, from the Open / Close button, Space or a double-click. Open (manual === true) holds the parts apart
+  // whatever the pointer does. Close (null) is the default: assembled, and taken apart while it's hovered.
+  const openBtn = document.getElementById("toggle-open");
   function lock(open) {
     manual = open;
     if (touchMode) touchOpen = open;
+    if (openBtn) {
+      const on = open === true;
+      openBtn.setAttribute("aria-pressed", String(on));
+      openBtn.textContent = on ? "Close" : "Open";
+      openBtn.title = on ? "Put it back together; hovering still takes it apart (Space)" : "Take it apart and keep it apart (Space)";
+    }
   }
-  canvas.addEventListener("dblclick", e => {
-    e.preventDefault();
-    lock(!(explodeTarget === 1));
-  });
+  const toggleOpen = () => lock(manual === true ? null : true);
+  canvas.addEventListener("dblclick", e => { e.preventDefault(); toggleOpen(); });
+  if (openBtn) openBtn.addEventListener("click", e => { e.stopPropagation(); toggleOpen(); });
 
   // right-button drag rotates the model
   const drag = { on: false, id: null, x: 0, y: 0, yaw: 0, pitch: 0, tYaw: 0, tPitch: 0 };
-  const PITCH = [-0.7, 0.9];
+  // The model turns freely, all the way round and over the top. A turn left or right is about the model's own vertical
+  // axis, so once it is tipped past the pole (upside down) a drag to the right has to turn it the other way to look the same.
+  const TAU = Math.PI * 2;
+  const yawDir = () => Math.cos(drag.tPitch) < 0 ? -1 : 1;
   canvas.addEventListener("contextmenu", e => e.preventDefault());
   canvas.addEventListener("pointerdown", e => {
     if (e.button !== 2) return;
@@ -783,8 +794,8 @@
   });
   canvas.addEventListener("pointermove", e => {
     if (!drag.on || e.pointerId !== drag.id) return;
-    drag.tYaw += (e.clientX - drag.x) * 0.008;
-    drag.tPitch = Math.max(PITCH[0], Math.min(PITCH[1], drag.tPitch + (e.clientY - drag.y) * 0.006));
+    drag.tYaw += (e.clientX - drag.x) * 0.008 * yawDir();
+    drag.tPitch += (e.clientY - drag.y) * 0.006;
     drag.x = e.clientX; drag.y = e.clientY;
   });
   const endDrag = e => {
@@ -817,8 +828,8 @@
     if (touches.size === 1) {
       if (!touchTurned && Math.hypot(t.x - t.x0, t.y - t.y0) < 8) return;
       touchTurned = true;
-      drag.tYaw += dx * 0.008;
-      drag.tPitch = Math.max(PITCH[0], Math.min(PITCH[1], drag.tPitch + dy * 0.006));
+      drag.tYaw += dx * 0.008 * yawDir();
+      drag.tPitch += dy * 0.006;
     } else {
       touchTurned = true;
       const s = spread(), m = midway();
@@ -938,6 +949,16 @@
   // turn and tilt. + / -: zoom. R: reset the view and put moved parts back. Esc: zoom out (or leave "how it works").
   const tourParts = Object.keys(DETAIL).filter(n => meshByName[n] && meshByName[n].geometry.index && meshByName[n].geometry.index.count);
   let partIdx = -1;
+  // back to the starting view and the parts back in place (the R key and the Reset button). The model may have been
+  // turned several times round, so take away the whole turns first: it then goes back the short way, not unwinding.
+  function resetView() {
+    let k = TAU * Math.round(drag.tYaw / TAU); drag.tYaw -= k; drag.yaw -= k;
+    k = TAU * Math.round(drag.tPitch / TAU); drag.tPitch -= k; drag.pitch -= k;
+    drag.tYaw = drag.tPitch = 0; zoom = 1; pan.x = pan.y = 0; partIdx = -1;
+    resetUntil = performance.now() + 1500;
+    if (detail.mesh) zoomTo(null);
+    tapped = null; refresh();
+  }
   addEventListener("keydown", e => {
     if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest("input, select, textarea, [contenteditable]")) return;
     const k = e.key;
@@ -951,13 +972,13 @@
     if ((k === " " || k === "Enter") && !onControl) {
       e.preventDefault();
       if (detail.mesh) zoomTo(null);
-      lock(!(explodeTarget === 1));
+      toggleOpen();
     } else if (k.startsWith("Arrow") && e.shiftKey) {
       e.preventDefault();
-      if (k === "ArrowLeft") drag.tYaw -= 0.3;
-      if (k === "ArrowRight") drag.tYaw += 0.3;
-      if (k === "ArrowUp") drag.tPitch = Math.max(PITCH[0], drag.tPitch - 0.15);
-      if (k === "ArrowDown") drag.tPitch = Math.min(PITCH[1], drag.tPitch + 0.15);
+      if (k === "ArrowLeft") drag.tYaw -= 0.3 * yawDir();
+      if (k === "ArrowRight") drag.tYaw += 0.3 * yawDir();
+      if (k === "ArrowUp") drag.tPitch -= 0.15;
+      if (k === "ArrowDown") drag.tPitch += 0.15;
     } else if ((k === "ArrowRight" || k === "ArrowLeft") && tourParts.length) {
       e.preventDefault();
       const cur = detail.mesh ? tourParts.indexOf(detail.mesh.name) : partIdx;
@@ -967,15 +988,10 @@
       zoomTo(meshByName[tourParts[partIdx]]);
     } else if (k === "ArrowUp" || k === "ArrowDown") {
       e.preventDefault();
-      drag.tPitch = Math.max(PITCH[0], Math.min(PITCH[1], drag.tPitch + (k === "ArrowUp" ? -0.15 : 0.15)));
+      drag.tPitch += k === "ArrowUp" ? -0.15 : 0.15;
     } else if (k === "+" || k === "=") { zoom = Math.max(0.45, zoom / 1.15); }
     else if (k === "-" || k === "_") { zoom = Math.min(2.2, zoom * 1.15); }
-    else if (k === "r" || k === "R") {
-      drag.tYaw = drag.tPitch = 0; zoom = 1; pan.x = pan.y = 0; partIdx = -1;
-      resetUntil = performance.now() + 1500;
-      if (detail.mesh) zoomTo(null);
-      tapped = null; refresh();
-    }
+    else if (k === "r" || k === "R") resetView();
     else if (k === "h" || k === "H") setLabels(!labels);
     else if (k === "x" || k === "X") setXray(!xray);
   });
@@ -1006,21 +1022,21 @@
   setXray(xray);
   if (xrayBtn) xrayBtn.addEventListener("click", () => setXray(!xray));
 
-  // ---------- views: preset angles, and a saved view that every model opens in ----------
+  // ---------- views: preset angles, and a pinned view that every model opens in ----------
   // A view is absolute: the angle round the model and the height it's seen from (degrees), the zoom and the pan, so a
   // view saved on one model frames every other model the same way. Turning the model by `yaw` moves the camera
   // the other way round it, and tilting it by `pitch` raises the camera. While a view is saved, it follows
-  // whatever you turn to, and other models open in it; Save view again forgets it.
+  // whatever you turn to, and other models open in it; Pin again to unpin it.
   const VIEW_KEY = "bp-view", PRESETS = [30, 45, 90];
   const rad = THREE.MathUtils.degToRad, deg = THREE.MathUtils.radToDeg, round1 = v => Math.round(v * 10) / 10;
-  const wrap360 = a => ((a % 360) + 360) % 360;
-  const viewNow = () => ({ az: round1(wrap360(V.az - deg(drag.tYaw))), el: round1(V.el + deg(drag.tPitch)), zoom: round1(zoom * 100) / 100,
+  const wrap360 = a => ((a % 360) + 360) % 360, wrap180 = a => wrap360(a + 180) - 180;
+  const viewNow = () => ({ az: round1(wrap360(V.az - deg(drag.tYaw))), el: round1(wrap180(V.el + deg(drag.tPitch))), zoom: round1(zoom * 100) / 100,
     panX: Math.round(pan.x * 1000) / 1000, panY: Math.round(pan.y * 1000) / 1000 });
   function applyView(v, snap) {
     // the shortest way round to the new angle
     const target = rad(V.az - v.az), d = ((target - drag.tYaw) % (2 * Math.PI) + 3 * Math.PI) % (2 * Math.PI) - Math.PI;
     drag.tYaw += d;
-    drag.tPitch = Math.max(PITCH[0], Math.min(PITCH[1], rad(v.el - V.el)));
+    drag.tPitch += ((rad(v.el - V.el) - drag.tPitch) % TAU + 3 * Math.PI) % TAU - Math.PI;   // and the shortest way round in height
     if (v.zoom) zoom = Math.max(0.45, Math.min(2.2, v.zoom));
     if (typeof v.panX === "number") { pan.x = clampPan(v.panX); pan.y = clampPan(v.panY || 0); }
     if (snap) { drag.yaw = drag.tYaw; drag.pitch = drag.tPitch; }
@@ -1043,7 +1059,8 @@
   viewbar.className = "viewbar"; viewbar.setAttribute("role", "group"); viewbar.setAttribute("aria-label", "View");
   viewbar.innerHTML = '<div class="vb-k">View</div>' +
     PRESETS.map(a => `<button type="button" data-az="${a}" aria-pressed="false" title="See it from ${a}° round">${a}°</button>`).join("") +
-    '<hr><button type="button" class="vb-save" aria-pressed="false">Save</button>';
+    '<hr><button type="button" class="vb-save" aria-pressed="false">Pin</button>' +
+    '<button type="button" class="vb-reset" title="Back to the starting view (R)">Reset</button>';
   document.body.appendChild(viewbar);
   const saveBtn = viewbar.querySelector(".vb-save"), presetBtns = [...viewbar.querySelectorAll("[data-az]")];
   // sits under the header, however many rows the header wraps to
@@ -1059,8 +1076,8 @@
   function setSaved(v) {
     savedView = v;
     saveBtn.setAttribute("aria-pressed", String(!!v));
-    saveBtn.textContent = v ? "Saved" : "Save";
-    saveBtn.title = v ? "This view is savedView: other models open in it. Click to forget it" : "Save this view: other models open in it";
+    saveBtn.textContent = v ? "Pinned" : "Pin";
+    saveBtn.title = v ? "This view is pinned: other models open in it. Click to unpin it" : "Pin this view: other models open in it";
     try { v ? localStorage.setItem(VIEW_KEY, JSON.stringify(v)) : localStorage.removeItem(VIEW_KEY); } catch (e) {}
   }
   if (savedView && typeof savedView.az === "number") applyView(savedView, true);
@@ -1070,6 +1087,7 @@
     applyView({ az: +b.dataset.az, el: V.el + deg(drag.tPitch) });
   }));
   saveBtn.addEventListener("click", e => { e.stopPropagation(); setSaved(savedView ? null : viewNow()); });
+  viewbar.querySelector(".vb-reset").addEventListener("click", e => { e.stopPropagation(); resetView(); });
   // keep the savedView view up to date with the one on screen, and light the preset it matches
   setInterval(() => {
     const v = viewNow();
@@ -1650,10 +1668,10 @@
       if (k === "Escape") { e.stopPropagation(); setExporting(false); return; }
       if (k.startsWith("Arrow")) {
         e.stopPropagation(); e.preventDefault();
-        if (k === "ArrowLeft") drag.tYaw -= 0.3;
-        if (k === "ArrowRight") drag.tYaw += 0.3;
-        if (k === "ArrowUp") drag.tPitch = Math.max(PITCH[0], drag.tPitch - 0.15);
-        if (k === "ArrowDown") drag.tPitch = Math.min(PITCH[1], drag.tPitch + 0.15);
+        if (k === "ArrowLeft") drag.tYaw -= 0.3 * yawDir();
+        if (k === "ArrowRight") drag.tYaw += 0.3 * yawDir();
+        if (k === "ArrowUp") drag.tPitch -= 0.15;
+        if (k === "ArrowDown") drag.tPitch += 0.15;
         return;
       }
       if (k === " " || k === "Enter") {

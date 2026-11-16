@@ -10,5 +10,5 @@
   "hotspotsLabel": "Laptop parts",
   "mark": "<b>MacBook Pro</b><span>14-inch, M5</span>",
   "dwg": "DWG MBP14-M5-001 &middot; Rev A<br>Units mm &middot; View az 45&deg; / el 28&deg;<br>Concept page, not affiliated with Apple",
-  "template": "page-a"
+  "screenHint": ", <kbd>/</kbd> for the screen"
 }

@@ -1,17 +1,24 @@
 /*
-Puts a model page together: a page template (templates/page-*.html) with the model's strings in its {{slots}} and its
-three scripts (geometry, model, engine) where <!--SCRIPTS--> is. Each script is either inline code ({ code }) or a
-file ({ src }). The same function runs in Node (tools/build.js) and in the browser (the single-file index.html, which
-keeps every template and the engine once and puts each page together when it's opened).
+Puts a model page together: the page template (templates/page.html) with the model's strings in its {{slots}} and its
+scripts where <!--SCRIPTS--> is. Each script is either inline code ({ code }) or a file ({ src }); the ones that are
+left out are skipped. In order:
+    manifest   the list of every model (window.BP_MANIFEST), for the picker; left out for a page with no picker
+    geometry   the model's generated geometry
+    model      the model's script (window.BLUEPRINT_MODEL)
+    engine     the shared engine, with the shaded and photo styles
+    ui         the shared controls round the engine: back button, model picker, render style, theme carried between pages
+The same function runs in Node (tools/build.js) and in the browser (the single-file index.html, which keeps the
+template and the engine once and puts each page together when it's opened).
 */
 (function (root) {
   "use strict";
-  const SLOTS = ["title", "sceneLabel", "hotspotsLabel", "mark", "dwg"];
+  const SLOTS = ["id", "title", "sceneLabel", "hotspotsLabel", "mark", "dwg", "screenHint"];
+  const ORDER = ["manifest", "geometry", "model", "engine", "ui"];
   function pageHtml(template, meta, scripts) {
     let html = template;
-    SLOTS.forEach(k => { if (meta[k] !== undefined) html = html.split("{{" + k + "}}").join(meta[k]); });
-    const tags = [scripts.geometry, scripts.model, scripts.engine]
-      .map(s => s.src ? '<script src="' + s.src + '"></script>' : "<script>\n" + s.code + "</script>").join("\n");
+    // a slot a model has no text for (screenHint, on most) is left empty
+    SLOTS.forEach(k => { html = html.split("{{" + k + "}}").join(meta[k] === undefined ? "" : meta[k]); });
+    const tags = ORDER.filter(k => scripts[k]).map(k => scripts[k].src ? '<script src="' + scripts[k].src + '"></script>' : "<script>\n" + scripts[k].code + "</script>").join("\n");
     const at = html.indexOf("<!--SCRIPTS-->");
     if (at < 0) throw new Error("template has no <!--SCRIPTS--> slot");
     return html.slice(0, at) + tags + html.slice(at + "<!--SCRIPTS-->".length);

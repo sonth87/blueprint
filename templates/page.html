@@ -85,9 +85,11 @@ header { display: flex; align-items: center; gap: 28px; }
 .tool:focus-visible { outline: 1px dashed var(--fg); outline-offset: 2px; }
 #labels[aria-pressed="false"], #xray[aria-pressed="false"] { color: var(--fg-3); text-decoration: line-through; text-decoration-thickness: 1px; }
 .tool:disabled { cursor: progress; color: var(--fg); }
+/* Open (held apart) is lit, like Export while it is on */
+.tool[aria-pressed="true"]#toggle-open { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 /* export mode: just the drawing, the theme swatches and the export bar */
 .tool[aria-pressed="true"]#export { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.exporting .mark, .exporting .hint, .exporting .dwg, .exporting #hotspots, .exporting .flow, .exporting #labels, .exporting #xray, .exporting #screen,
+.exporting .mark, .exporting .hint, .exporting .dwg, .exporting #hotspots, .exporting .flow, .exporting #labels, .exporting #xray, .exporting #screen, .exporting #toggle-open,
 .exporting .bp-model { opacity: 0 !important; visibility: hidden; pointer-events: none; }
 .exporting .sheet { opacity: 0; }
 .sheet { transition: opacity .4s ease; }
@@ -208,7 +210,7 @@ header { display: flex; align-items: center; gap: 28px; }
 }
 </style>
 </head>
-<body>
+<body data-model="{{id}}">
 <div class="sheet" aria-hidden="true"></div>
 <canvas id="scene" aria-label="{{sceneLabel}}"></canvas>
 <div id="hotspots" aria-label="{{hotspotsLabel}}"></div>
@@ -219,6 +221,7 @@ header { display: flex; align-items: center; gap: 28px; }
   <header>
     <a class="mark" href="#top">{{mark}}</a>
     <div class="tools">
+      <button class="tool" type="button" id="toggle-open" aria-pressed="false" title="Take it apart and keep it apart (Space)">Open</button>
       <button class="tool" type="button" id="screen" hidden aria-pressed="false" title="Put your own photo or video on the screen">Screen</button>
       <input type="file" id="screen-file" accept="image/*,video/*" hidden>
       <button class="tool" type="button" id="xray" aria-pressed="true" title="Show or hide the hidden edges and assembly guides (X)">X-ray</button>
@@ -253,7 +256,7 @@ header { display: flex; align-items: center; gap: 28px; }
     <button type="button" class="xb-go">Download</button>
   </div>
 </div>
-<p class="hint" id="hint">Hover to take it apart; double-click or Space to lock it open or closed. Click a part to zoom in, drag it to move it. Right-drag or <kbd>Shift</kbd> + arrows to rotate, <kbd>&larr;</kbd> <kbd>&rarr;</kbd> to step through the parts, <kbd>+</kbd> <kbd>&minus;</kbd> to zoom, <kbd>R</kbd> to reset, <kbd>H</kbd> to hide the labels, <kbd>X</kbd> for X-ray. Press <kbd>.</kbd> to see how it works, <kbd>/</kbd> for the screen.</p>
+<p class="hint" id="hint">Hover to take it apart; the Open button, double-click or <kbd>Space</kbd> keeps it apart. Click a part to zoom in, drag it to move it. Right-drag or <kbd>Shift</kbd> + arrows to rotate, <kbd>&larr;</kbd> <kbd>&rarr;</kbd> to step through the parts, <kbd>+</kbd> <kbd>&minus;</kbd> to zoom, <kbd>R</kbd> to reset, <kbd>H</kbd> to hide the labels, <kbd>X</kbd> for X-ray. Press <kbd>.</kbd> to see how it works{{screenHint}}.</p>
 <div class="dwg" aria-hidden="true">{{dwg}}</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

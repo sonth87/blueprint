@@ -9,6 +9,5 @@
   "sceneLabel": "Line drawing of a volumetric LED cube on a white base, patterns of light moving through its thousand voxels: on hover the glass lifts off, the layers rise and the diffuser, driver board and base move apart",
   "hotspotsLabel": "Cube parts",
   "mark": "<b>LED Cube</b><span>Volumetric display</span>",
-  "dwg": "DWG LED-001 &middot; Rev A<br>Units mm &middot; View az 30&deg; / el 20&deg;<br>Concept design, modelled from a render",
-  "template": "page-b"
+  "dwg": "DWG LED-001 &middot; Rev A<br>Units mm &middot; View az 30&deg; / el 20&deg;<br>Concept design, modelled from a render"
 }

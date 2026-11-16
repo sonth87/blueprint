@@ -10,6 +10,6 @@
   "hotspotsLabel": "Laptop parts",
   "mark": "<b>Washing Machine</b><span>Front loader</span>",
   "dwg": "DWG WSH-001 &middot; Rev A<br>Units mm &middot; View az 35&deg; / el 18&deg;<br>Concept design, generic parts",
-  "template": "page-a",
+  "screenHint": ", <kbd>/</kbd> for the screen",
   "screenRuntime": true
 }

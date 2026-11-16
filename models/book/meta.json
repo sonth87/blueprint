@@ -9,6 +9,5 @@
   "sceneLabel": "Line drawing of an open hardcover book whose pages turn by themselves without end: on hover the page blocks lift apart from the spine and the covers",
   "hotspotsLabel": "Book parts",
   "mark": "<b>Book</b><span>Pages that never end</span>",
-  "dwg": "DWG BK-001 &middot; Rev A<br>Units mm &middot; View az 20&deg; / el 40&deg;<br>Original concept design",
-  "template": "page-b"
+  "dwg": "DWG BK-001 &middot; Rev A<br>Units mm &middot; View az 20&deg; / el 40&deg;<br>Original concept design"
 }

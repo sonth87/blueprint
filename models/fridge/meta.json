@@ -10,6 +10,6 @@
   "hotspotsLabel": "Laptop parts",
   "mark": "<b>Refrigerator</b><span>French door</span>",
   "dwg": "DWG FRG-001 &middot; Rev A<br>Units cm &middot; View az 35&deg; / el 16&deg;<br>Concept design, generic parts",
-  "template": "page-a",
+  "screenHint": ", <kbd>/</kbd> for the screen",
   "screenRuntime": true
 }

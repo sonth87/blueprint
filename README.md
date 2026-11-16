@@ -5,11 +5,11 @@ three.js engine: they turn, come apart, have labelled callouts and a "how it wor
 
 ## Layout
 
-- `engine/` the shared engine: `engine.js`, `realistic.js` (shaded and photo styles), `screen-runtime.js` (animated screens)
+- `engine/` the shared engine: `engine.js`, `realistic.js` (shaded and photo styles), `screen-runtime.js` (animated screens), `ui.js` (the controls round every model page: back button, model picker, render style, theme carried between models)
 - `kit/` the procedural-geometry helpers the model builders use
-- `templates/` page templates (`page-a.html`, `page-b.html`), `page.js` (puts a page together), `gallery.html` (the home grid and viewer shell)
+- `templates/` page templates (`page.html`), `page.js` (puts a page together), `gallery.html` (the home grid and viewer shell)
 - `models/index.json` model ids in gallery order
-- `models/<id>/meta.json` label, category, tags, theme key, template and the page's text; `model.js` the behaviour, `geometry.js` the generated geometry, `build.js` (some models) the script that generates `geometry.js`
+- `models/<id>/meta.json` label, category, tags, theme key and the page's text (`title`, `sceneLabel`, `hotspotsLabel`, `mark`, `dwg`, and `screenHint` for models with an animated screen); `model.js` the behaviour, `geometry.js` the generated geometry, `build.js` (some models) the script that generates `geometry.js`
 - `tools/` `build.js` (the build), `build-geometry.js`, `thumb_one.js`, `thumbs.js`, `capture.js`, `build_package.js`
 - `thumbs/<id>.webp` the home grid's pictures; `docs/` the embed docs page; `packages/blueprintspace/` the npm package
 
@@ -20,7 +20,7 @@ three.js engine: they turn, come apart, have labelled callouts and a "how it wor
     npm run build:local   # index.html only
 
 `index.html` is one self-contained file: open it straight from disk. `dist/` is the same gallery split up: a shared
-`engine.js`, and per model a small page `m/<id>.html` plus `m/<id>.geometry.js` and `m/<id>.model.js`, fetched only when
+`engine.js` and `ui.js`, a `manifest.js` (the list of models for each page's picker), and per model a small page `m/<id>.html` plus `m/<id>.geometry.js` and `m/<id>.model.js`, fetched only when
 the model is opened. Node 18+, no dependencies. The build checks every input first and writes nothing if one is missing.
 
 ## Add or edit a model

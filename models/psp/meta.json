@@ -10,6 +10,6 @@
   "hotspotsLabel": "Laptop parts",
   "mark": "<b>PlayStation Portable</b><span>PSP-1000</span>",
   "dwg": "DWG PSP-1000-001 &middot; Rev A<br>Units mm &middot; View az 35&deg; / el 18&deg;<br>Concept page, not affiliated with Sony",
-  "template": "page-a",
+  "screenHint": ", <kbd>/</kbd> for the screen",
   "screenRuntime": true
 }

@@ -10,6 +10,5 @@
   "hotspotsLabel": "Cabinet parts",
   "mark": "<b>Arcade Cabinet</b><span>Upright</span>",
   "dwg": "DWG AC-001 &middot; Rev A<br>Units mm &middot; View az 35&deg; / el 18&deg;<br>After &ldquo;Arcade cabinet&rdquo; in Anatomy by Ryan (MIT)",
-  "template": "page-b",
   "screenRuntime": true
 }

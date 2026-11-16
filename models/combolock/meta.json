@@ -9,6 +9,5 @@
   "sceneLabel": "Line drawing of a three-wheel combination safe lock behind a door section: the dial is turned 4 left, 3 right, 2 left, the wheels' gates line up, the fence drops and the bolt draws back; on hover the dial, cover, wheels, cam, lever and bolt move apart",
   "hotspotsLabel": "Lock parts",
   "mark": "<b>Combination Lock</b><span>Three-wheel</span>",
-  "dwg": "DWG CL-001 &middot; Rev A<br>Units mm &middot; View az 145&deg; / el 24&deg;<br>After &ldquo;Turning dial&rdquo; in Anatomy by Ryan (MIT)",
-  "template": "page-b"
+  "dwg": "DWG CL-001 &middot; Rev A<br>Units mm &middot; View az 145&deg; / el 24&deg;<br>After &ldquo;Turning dial&rdquo; in Anatomy by Ryan (MIT)"
 }

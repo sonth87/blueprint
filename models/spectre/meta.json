@@ -10,5 +10,5 @@
   "hotspotsLabel": "Laptop parts",
   "mark": "<b>Spectre x360</b><span>14-inch 2-in-1</span>",
   "dwg": "DWG SX360-14-001 &middot; Rev A<br>Units mm &middot; View az 45&deg; / el 28&deg;<br>Concept page, not affiliated with HP",
-  "template": "page-a"
+  "screenHint": ", <kbd>/</kbd> for the screen"
 }

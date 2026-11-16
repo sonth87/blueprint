@@ -9,6 +9,5 @@
   "sceneLabel": "Line drawing of a dial indicator on a surface plate: the carriage slides its gauge blocks under the plunger and the needle turns with the height; on hover the dial, plunger, carriage and stand move apart",
   "hotspotsLabel": "Dial indicator parts",
   "mark": "<b>Dial Indicator</b><span>Measuring</span>",
-  "dwg": "DWG DI-001 &middot; Rev A<br>Units mm &middot; View az 42&deg; / el 28&deg;<br>After &ldquo;Dial indicator&rdquo; in Anatomy by Ryan (MIT)",
-  "template": "page-b"
+  "dwg": "DWG DI-001 &middot; Rev A<br>Units mm &middot; View az 42&deg; / el 28&deg;<br>After &ldquo;Dial indicator&rdquo; in Anatomy by Ryan (MIT)"
 }

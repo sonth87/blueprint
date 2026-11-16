@@ -10,6 +10,6 @@
   "hotspotsLabel": "Laptop parts",
   "mark": "<b>Playdate</b><span>Handheld with a crank</span>",
   "dwg": "DWG PD-001 &middot; Rev A<br>Units mm &middot; View az 30&deg; / el 16&deg;<br>Concept page, not affiliated with Panic",
-  "template": "page-a",
+  "screenHint": ", <kbd>/</kbd> for the screen",
   "screenRuntime": true
 }

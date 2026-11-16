@@ -6,14 +6,14 @@ description: Add a new interactive 3D blueprint model to this gallery (blueprint
 # Blueprint models for this gallery
 
 A model is a folder `models/<id>/`; `tools/build.js` puts every page together from it, the shared engine
-(`engine/`) and a page template (`templates/page-a.html` or `page-b.html`, via `templates/page.js`). See README.md.
+(`engine/`, with its controls in `engine/ui.js`) and one page template (`templates/page.html`, via `templates/page.js`). See README.md.
 
 | File | What it holds |
 |---|---|
 | `models/<id>/build.js` | The geometry in mm, made with `kit/procedural.js`; the `explode` offsets, `hotspots` and `tour`. It ends with `writeGeometry(HERE, geometry)`. |
 | `models/<id>/geometry.js` | Written by `build.js` (`node models/<id>/build.js`, or `npm run geometry` for all). Never edit it. Models without a build.js (exported from Blender) keep only this file as data. |
 | `models/<id>/model.js` | `window.BLUEPRINT_MODEL`: part descriptions (`detail`), materials for the Shaded/Photo styles, the camera `view`, `occluders`, and `setup(E)` for motion (fans, screens, keys). |
-| `models/<id>/meta.json` | The gallery entry and the page's text: `id, label, kind, category, tags, key` (the theme's localStorage key, same as `themeKey` in model.js), `template`, `title, sceneLabel, hotspotsLabel, mark, dwg`, and `screenRuntime: true` when model.js uses `BP_screenAnimation`. |
+| `models/<id>/meta.json` | The gallery entry and the page's text: `id, label, kind, category, tags, key` (the theme's localStorage key, same as `themeKey` in model.js), `title, sceneLabel, hotspotsLabel, mark, dwg`, `screenHint` (`, <kbd>/</kbd> for the screen`, for a model with an animated screen) and `screenRuntime: true` when model.js uses `BP_screenAnimation`. |
 | `models/index.json` | The gallery's order. Add the id next to its category's other models so the picker groups stay together. |
 | `thumbs/<id>.webp` | The home grid's picture. The grid shows nothing without it. |
 
@@ -68,8 +68,7 @@ All 2D shapes are lists of triangles ("regions"); solids take a region and heigh
 the base for a spool part, as `local()` does in every build). `tour.points` are named surface points and `tour.steps`
 are `{ t, d, focus, dist, ex (0 together / 1 apart), p: [points], n: [parts to light], ms }`.
 
-Two page templates: `page-b` (most models) and `page-a` (the laptop-style chrome of framework, gameboy…); copy the
-choice of the model you started from. `meta.json` fills their slots: `title`, `sceneLabel` (the canvas
+One page template for every model. `meta.json` fills its slots: `title`, `sceneLabel` (the canvas
 `aria-label`), `hotspotsLabel`, `mark` (`<b>Name</b><span>Subtitle</span>`) and `dwg` (the drawing block; end it with
 "Concept page, not affiliated with <maker>" for real products). `screenRuntime: true` puts `engine/screen-runtime.js`
 before `model.js`.

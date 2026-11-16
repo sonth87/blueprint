@@ -10,5 +10,5 @@
   "hotspotsLabel": "Macintosh parts",
   "mark": "<b>Macintosh</b><span>128K &middot; 1984</span>",
   "dwg": "DWG M0001-128K-01 &middot; Rev A<br>Units mm &middot; View az 45&deg; / el 28&deg;<br>Concept page, not affiliated with Apple",
-  "template": "page-a"
+  "screenHint": ", <kbd>/</kbd> for the screen"
 }

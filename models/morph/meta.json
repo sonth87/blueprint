@@ -10,6 +10,6 @@
   "hotspotsLabel": "Laptop parts",
   "mark": "<b>Morph</b><span>Handheld concept</span>",
   "dwg": "DWG MRP-001 &middot; Rev A<br>Units mm &middot; View az 30&deg; / el 24&deg;<br>Concept design, modelled from a render",
-  "template": "page-a",
+  "screenHint": ", <kbd>/</kbd> for the screen",
   "screenRuntime": true
 }
