@@ -4,7 +4,7 @@ with the masking done on a canvas in the browser, so it needs no Python or Pillo
 
     NODE_PATH=<dir with playwright-core> node tools/thumb_one.js <page.html> <out.webp> [--key <theme key>] [--selector <css>]
 
-A blueprint page (e.g. dist/m/macmini.html, --key mm4-theme; run npm run build:dist first, the page's scripts are relative so it opens from disk) is shot whole in its dark theme with the chrome hidden;
+A blueprint page (e.g. 'dist/viewer.html?model=macmini', --key mm4-theme; run npm run build:dist first, it opens from disk) is shot whole in its dark theme with the chrome hidden;
 with --selector only that element is shot (an Anatomy figure's stage). The shot becomes a white 960 x 720 WebP whose
 alpha is the lines' brightness, cropped to the drawing at 4:3 with a margin, so the grid can colour it with any theme.
 Chrome: CHROMIUM=path, default the macOS Google Chrome.
@@ -27,7 +27,7 @@ const HIDE = `.page, .hint, .dwg, #hotspots, .sheet, .viewbar, .panpad, .flow, .
     args: ["--use-gl=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] });
   const p = await (await b.newContext({ viewport: { width: 1200, height: selector ? 1600 : 900 }, deviceScaleFactor: 1 })).newPage();
   if (key) await p.addInitScript(k => { try { localStorage.setItem(k, "dark"); } catch (e) {} }, key);
-  await p.goto("file://" + path.resolve(page));
+  await p.goto(/^(https?|file):/.test(page) ? page : "file://" + path.resolve(page.split("?")[0]) + (page.includes("?") ? "?" + page.split("?").slice(1).join("?") : ""));   // a file with a ?query, or a URL
   if (!selector) await p.addStyleTag({ content: HIDE });
   // --hide <css>: leave things out of the shot, e.g. a WebGL layer that headless Chrome's software GL renders wrong
   if (hide) await p.addStyleTag({ content: hide + " { visibility: hidden !important; }" });

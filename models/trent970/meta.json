@@ -1,0 +1,13 @@
+{
+  "id": "trent970",
+  "label": "Trent 970 Ground Run",
+  "kind": "engine",
+  "category": "Engines",
+  "tags": "rolls-royce trent 970 turbofan a380 jet engine three spool fan compressor combustor turbine thrust reverser ground run test frame load cell animated anatomy",
+  "key": "t97-theme",
+  "title": "Trent 970 Ground Run",
+  "sceneLabel": "Line drawing of a Trent 970 turbofan hung by its pylon under the live frame of a ground-run thrust frame on a concrete pad, its near upper quarter cut away; the three spools turn at their own speeds as the thrust cycles, air streaks, cold wind and a hot jet follow it, and on hover the cowls, compressors, turbines, shafts and frames move apart",
+  "hotspotsLabel": "Engine and frame parts",
+  "mark": "<b>Trent 970</b><span>Ground run, thrust frame</span>",
+  "dwg": "DWG T97-001 &middot; Rev A<br>Units cm &middot; View az 32&deg; / el 14&deg;<br>After &ldquo;Turbofan ground run&rdquo; in Anatomy by Ryan (MIT); concept, not affiliated with Rolls-Royce"
+}

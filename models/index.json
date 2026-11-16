@@ -8,6 +8,8 @@
   "gamingpc",
   "iphone17",
   "walkman",
+  "gramophone",
+  "musicbox",
   "gameboy",
   "playdate",
   "gbconcept",
@@ -26,6 +28,7 @@
   "turbofan",
   "v8",
   "raptor",
+  "trent970",
   "hover",
   "cybertruck",
   "spaceship",
@@ -38,5 +41,8 @@
   "pushbutton",
   "watch",
   "rippletank",
-  "combolock"
+  "combolock",
+  "powerstation",
+  "processpump",
+  "foundry"
 ]

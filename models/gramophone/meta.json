@@ -1,0 +1,13 @@
+{
+  "id": "gramophone",
+  "label": "Gramophone",
+  "kind": "record player",
+  "category": "Audio",
+  "tags": "gramophone record player turntable vinyl phonograph brass horn retro wooden cabinet radio tonearm animated",
+  "key": "gp-theme",
+  "title": "Gramophone",
+  "sceneLabel": "Line drawing of a retro record player with a brass horn: the record turns at 33 1/3 rpm while the tonearm creeps inward and the radio needle sweeps; on hover the horn, turntable, deck, motor, speakers, amplifier board, front panel, cabinet and feet move apart",
+  "hotspotsLabel": "Gramophone parts",
+  "mark": "<b>Gramophone</b><span>Record player</span>",
+  "dwg": "DWG GP-001 &middot; Rev A<br>Units mm &middot; View az 18&deg; / el 24&deg;<br>Concept page, not affiliated with any maker"
+}

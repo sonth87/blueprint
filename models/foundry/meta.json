@@ -1,0 +1,14 @@
+{
+  "id": "foundry",
+  "label": "Foundry Pour",
+  "kind": "foundry",
+  "category": "Industry",
+  "tags": "foundry pour steel ladle mould casting sand cope drag riser worm gearbox hand wheel pyrometer molten industry animated anatomy",
+  "key": "fdy-theme",
+  "title": "Foundry Pour",
+  "sceneLabel": "Line drawing of a foundry pouring bay in a continuous loop: a hand wheel turns a 40 to 1 worm gearbox that tilts a refractory-lined ladle on its trunnions, a stream of molten steel falls into the pouring basin and the steel rises through the sprue, runner and gates into the sand mould and its two risers, then the casting freezes and a new mould and ladle begin again, while a pyrometer on a tripod reads the stream; on hover the ladle, drive, counterweight, flasks, basin and pyrometer come apart",
+  "hotspotsLabel": "Foundry parts",
+  "mark": "<b>Foundry Pour</b><span>Ladle, mould and risers</span>",
+  "dwg": "DWG FDY-001 &middot; Rev A<br>Units mm &middot; View az 35&deg; / el 22&deg;<br>After &ldquo;Pouring steel&rdquo; in Anatomy by Ryan (MIT)",
+  "screenRuntime": true
+}

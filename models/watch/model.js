@@ -4,7 +4,7 @@
 // turn); the fourth wheel turns once a minute and the rest of the train follows at its ratios.
 (function () {
   "use strict";
-  const G = window.WM_GEOMETRY;
+  const G = window.WMV_GEOMETRY;
   const DETAIL = {
     "Main Plate": ["Main plate", "The base everything is built on. The dial and hands are on its other side."],
     "Pillars": ["Pillars", "Hold the bridges at the right height over the plate."],
@@ -36,7 +36,7 @@
 
   window.BLUEPRINT_MODEL = {
     geometry: G,
-    themeKey: "wm-theme",
+    themeKey: "wmv-theme",
     touchHint: "Tap the movement to take it apart",
     view: { az: 30, el: 42 },
     spoolOf: o => o.spool || null,

@@ -1,0 +1,13 @@
+{
+  "id": "musicbox",
+  "label": "Music Box",
+  "kind": "music box",
+  "category": "Audio",
+  "tags": "music box cylinder comb pins wind-up spring governor gear train hinged lid wooden case melody ode to joy animated",
+  "key": "mb-theme",
+  "title": "Music Box",
+  "sceneLabel": "Line drawing of a cylinder music box with its lid raised, playing Ode to Joy: the pinned brass cylinder turns, each pin plucks a tooth of the steel comb which rings, and the governor fly spins; on hover the lid, cylinder, comb, spring motor, gear train, bedplate and case move apart",
+  "hotspotsLabel": "Music box parts",
+  "mark": "<b>Music Box</b><span>Cylinder, 30 notes</span>",
+  "dwg": "DWG MB-001 &middot; Rev A<br>Units mm &middot; View az 30&deg; / el 38&deg;<br>Generic cylinder music box; tune: Ode to Joy (public domain)"
+}

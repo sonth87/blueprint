@@ -246,6 +246,6 @@ const tour = {
   ],
 };
 
-const geometry = geometryScript("WM_GEOMETRY", "watch/build.js", { explode, hotspots, tour, constants: { BAR, C, TH, FO, ES, PF, BA } });
+const geometry = geometryScript("WMV_GEOMETRY", "watch/build.js", { explode, hotspots, tour, constants: { BAR, C, TH, FO, ES, PF, BA } });
 writeGeometry(HERE, geometry);
 console.log(`models/watch/geometry.js: ${geometry.stats}`);

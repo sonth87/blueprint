@@ -107,6 +107,10 @@ models, BP_PAGE(id) the address of another model's page (default: <id>.html next
     }
     .bp-list li.group:first-child { padding-top: 7px; }
     .bp-list li.group:not(:first-child) { margin-top: 4px; border-top: 1px solid var(--rule); border-radius: 0; }
+    /* the header has more in it than one row holds on a laptop (back button, picker, render style, the tools, the swatches):
+       let it wrap onto a second row, with the swatches at the right, rather than run off the edge of the window */
+    header { flex-wrap: wrap; row-gap: 10px; }
+    .themes { margin-left: auto; }
     /* on a phone the dropdown takes its own row under the brand and swatches */
     @media (max-width: 760px) {
       header { flex-wrap: wrap; row-gap: 12px; }
