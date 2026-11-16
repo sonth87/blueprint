@@ -1,5 +1,5 @@
 /*
-Screenshots of a model page (dist/m/<id>.html, from `npm run build:dist`; it opens from disk) for checking a build: assembled, taken apart (Space locks it apart), the same without
+Screenshots of a model page (dist/viewer.html?model=<id>, from `npm run build:dist`; it opens from disk) for checking a build: assembled, taken apart (Space locks it apart), the same without
 labels, and a close-up. Prints any page errors and exits 1 if there were some.
 
     NODE_PATH=<dir with playwright-core> node tools/capture.js <page.html> <out dir> [--zoom x,y,clicks]
@@ -25,7 +25,7 @@ fs.mkdirSync(out, { recursive: true });
   const errors = [];
   p.on("pageerror", e => errors.push(e.message));
   p.on("console", m => { if (m.type() === "error" && !/GL Driver|GPU stall/.test(m.text())) errors.push(m.text()); });
-  await p.goto("file://" + path.resolve(page));
+  await p.goto(/^(https?|file):/.test(page) ? page : "file://" + path.resolve(page.split("?")[0]) + (page.includes("?") ? "?" + page.split("?").slice(1).join("?") : ""));   // a file with a ?query, or a URL
   await p.waitForTimeout(2500);
   await p.mouse.move(1399, 999);
   await p.waitForTimeout(300);

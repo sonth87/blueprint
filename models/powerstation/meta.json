@@ -1,0 +1,13 @@
+{
+  "id": "powerstation",
+  "label": "Power Station Unit",
+  "kind": "power plant",
+  "category": "Industry",
+  "tags": "power station generating unit turbo-generator 660 MW stator rotor exciter bus duct step-up transformer 400 kV substation circuit breaker SF6 disconnector surge arrester gantry synchronising animated anatomy",
+  "key": "pwr-theme",
+  "title": "Power Station Unit",
+  "sceneLabel": "Line drawing of a power station generating unit: a cut-open 660 megawatt turbo-generator on its foundation table, three bus ducts, a step-up transformer, a 400 kilovolt bay of arresters, current transformers, circuit breakers and disconnectors, the gantry where the line leaves and a synchronising desk; the rotor spins and the breaker and disconnector open and close in turn; on hover the modules move apart",
+  "hotspotsLabel": "Power station parts",
+  "mark": "<b>Power Station Unit</b><span>660 MW, 22 to 400 kV</span>",
+  "dwg": "DWG PWR-001 &middot; Rev A<br>Units m &middot; View az 32&deg; / el 26&deg;<br>After &ldquo;Power station&rdquo; in Anatomy by Ryan (MIT)"
+}

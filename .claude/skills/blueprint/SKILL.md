@@ -45,7 +45,7 @@ Start from the closest existing model and read its `build.js`, `model.js` and `m
    That writes `dist/` (Vercel; gitignored) and the single-file `index.html` at the root (for opening from disk;
    committed). The build checks every input first and writes nothing if something is missing.
 8. **Verify like a critic** (below). Fix and rebuild until every check passes.
-9. **Thumbnail:** `node tools/thumb_one.js dist/m/<id>.html thumbs/<id>.webp --key <themeKey>`, then look at it next to
+9. **Thumbnail:** `node tools/thumb_one.js 'dist/viewer.html?model=<id>' thumbs/<id>.webp --key <themeKey>`, then look at it next to
    its neighbours on the home grid.
 
 ## Geometry API (`kit/procedural.js`)
@@ -68,8 +68,9 @@ All 2D shapes are lists of triangles ("regions"); solids take a region and heigh
 the base for a spool part, as `local()` does in every build). `tour.points` are named surface points and `tour.steps`
 are `{ t, d, focus, dist, ex (0 together / 1 apart), p: [points], n: [parts to light], ms }`.
 
-One page template for every model. `meta.json` fills its slots: `title`, `sceneLabel` (the canvas
-`aria-label`), `hotspotsLabel`, `mark` (`<b>Name</b><span>Subtitle</span>`) and `dwg` (the drawing block; end it with
+One page (`templates/page.html`) shows every model; the model is a parameter, not a page of its own. `meta.json` is
+put in front of `model.js` as `window.BP_META`, and `engine/boot.js` fills the page's text from it before the engine
+starts: `title`, `sceneLabel` (the canvas `aria-label`), `hotspotsLabel`, `mark` (`<b>Name</b><span>Subtitle</span>`) and `dwg` (the drawing block; end it with
 "Concept page, not affiliated with <maker>" for real products). `screenRuntime: true` puts `engine/screen-runtime.js`
 before `model.js`.
 
@@ -99,7 +100,7 @@ Learned on this gallery's models, plus the parts of Anatomy's craft that carry o
 Every check needs `playwright-core` and Chrome: `NODE_PATH=~/PROJECTS/crawl-svg-icon/node_modules` (or any folder
 holding `playwright-core`); `CHROMIUM=…` overrides the browser path. Put screenshots in the scratchpad, not the repo.
 
-1. `node tools/capture.js dist/m/<id>.html <scratch>/cap --zoom x,y,3` → assembled, apart, apart without labels and a
+1. `node tools/capture.js 'dist/viewer.html?model=<id>' <scratch>/cap --zoom x,y,3` → assembled, apart, apart without labels and a
    close-up, and it fails on any page error. **Read every PNG.** Check: the outline reads as the real object at 1×;
    nothing hidden apart that should show; every module separated; callout dots on their parts; the close-up has no
    bare face or loose line. If "apart" looks assembled, the explode didn't toggle: Space flips the current state.

@@ -96,9 +96,10 @@ iframe.shown { opacity: 1; }
 (function () {
   "use strict";
   /* Filled in by tools/build.js. Two builds share this shell:
-     - dist/index.html (Vercel): MODELS entries carry `src` (m/<id>.html), a small page that loads the shared engine,
-       its controls (ui.js) and its own geometry and model files when opened; TEMPLATE, ENGINE and UI stay empty.
-     - index.html (one file, opens from disk): MODELS entries carry the page's strings and the geometry and model code;
+     - dist/index.html (Vercel): MODELS entries carry `src` (viewer.html?model=<id>): the one viewer page, told which
+       model by its address, loads the shared engine, its controls (ui.js) and that model's two files;
+       TEMPLATE, ENGINE and UI stay empty.
+     - index.html (one file, opens from disk): MODELS entries carry the model's geometry and model code;
        TEMPLATE, ENGINE and UI hold the page template, the engine and the controls once, and the PAGE_JS slot above
        holds templates/page.js, which puts a page together when it's opened.
      Either way the model pages are frames, and they ask this page (window.BP_GALLERY below) to open another model. */
@@ -200,7 +201,7 @@ iframe.shown { opacity: 1; }
       try { f.contentWindow.focus(); } catch (e) {}   // so "/" and "." reach the page straight away
     }, { once: true });
     if (m.src) f.src = m.src;
-    else f.srcdoc = BP_page.pageHtml(TEMPLATE, m, { manifest: { code: MANIFEST_JS }, geometry: { code: m.geometry }, model: { code: m.model }, engine: { code: ENGINE }, ui: { code: UI } });
+    else f.srcdoc = BP_page.pageHtml(TEMPLATE, { manifest: { code: MANIFEST_JS }, geometry: { code: m.geometry }, model: { code: m.model }, engine: { code: ENGINE }, ui: { code: UI } });
     document.body.appendChild(frame);
     // the old page goes once the new one is up, which also frees its WebGL context
     if (old) setTimeout(() => old.remove(), 400);

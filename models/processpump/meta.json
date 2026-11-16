@@ -1,0 +1,13 @@
+{
+  "id": "processpump",
+  "label": "Process Pump",
+  "kind": "pump",
+  "category": "Industry",
+  "tags": "process pump API 610 OH2 refinery centrifugal impeller volute cavitation NPSH suction drum seal bearing motor animated anatomy",
+  "key": "pp-theme",
+  "title": "Process Pump",
+  "sceneLabel": "Line drawing of an API 610 OH2 process pump on its baseplate, cut open above the shaft, drawing gas oil from a suction drum cut away in quarter: the impeller turns slowly, the level falls, vapour sheets form on the vanes and the discharge head drops; on hover the baseplate, motor, coupling, bearing housing, casing, seal, lines, drum and gauges move apart",
+  "hotspotsLabel": "Process pump parts",
+  "mark": "<b>Process Pump</b><span>API 610 OH2</span>",
+  "dwg": "DWG PP-001 &middot; Rev A<br>Units mm &middot; View az 40&deg; / el 24&deg;<br>After &ldquo;Process pump&rdquo; in Anatomy by Ryan (MIT)"
+}

@@ -22,7 +22,7 @@ fs.mkdirSync(OUT, { recursive: true });
 const { load, entry } = require("./build.js");
 const { pageHtml } = require("../templates/page.js");
 const data = load();
-const models = data.models.map(m => ({ ...entry(m), html: pageHtml(data.template, m.meta,
+const models = data.models.map(m => ({ ...entry(m), html: pageHtml(data.template,
   { geometry: { code: m.geometry }, model: { code: m.model }, engine: { code: data.engine } }) }));
 const three = process.env.THREE_JS || require.resolve("three/build/three.min.js");
 const HIDE = `.page, .hint, .dwg, #hotspots, .sheet, .viewbar, .panpad, .flow, .exportbar, .tour, .detail, #tip, .bp-controls { display: none !important; }
