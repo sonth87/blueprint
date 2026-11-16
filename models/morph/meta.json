@@ -1,0 +1,15 @@
+{
+  "id": "morph",
+  "label": "Morph Handheld",
+  "kind": "console",
+  "category": "Consoles",
+  "tags": "morph handheld console concept retro controller screen orange cream design",
+  "key": "mrp-theme",
+  "title": "Morph Handheld",
+  "sceneLabel": "Line drawing of the Morph, a two-piece handheld concept: a cream console with a screen, a glowing dome and a status display standing behind its controller; on hover the shells open and the screen, boards, battery, buttons and rumble motor move apart",
+  "hotspotsLabel": "Laptop parts",
+  "mark": "<b>Morph</b><span>Handheld concept</span>",
+  "dwg": "DWG MRP-001 &middot; Rev A<br>Units mm &middot; View az 30&deg; / el 24&deg;<br>Concept design, modelled from a render",
+  "template": "page-a",
+  "screenRuntime": true
+}

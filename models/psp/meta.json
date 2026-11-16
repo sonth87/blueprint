@@ -1,0 +1,15 @@
+{
+  "id": "psp",
+  "label": "PlayStation Portable",
+  "kind": "console",
+  "category": "Consoles",
+  "tags": "psp playstation portable sony handheld umd 2004 games",
+  "key": "psp-theme",
+  "title": "PlayStation Portable",
+  "sceneLabel": "Line drawing of the PlayStation Portable (PSP-1000): on hover the screen, front shell, buttons, board, UMD drive, battery, disc and back shell move apart",
+  "hotspotsLabel": "Laptop parts",
+  "mark": "<b>PlayStation Portable</b><span>PSP-1000</span>",
+  "dwg": "DWG PSP-1000-001 &middot; Rev A<br>Units mm &middot; View az 35&deg; / el 18&deg;<br>Concept page, not affiliated with Sony",
+  "template": "page-a",
+  "screenRuntime": true
+}

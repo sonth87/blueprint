@@ -1,0 +1,14 @@
+{
+  "id": "raptor",
+  "label": "Rocket Engine (Raptor-class)",
+  "kind": "engine",
+  "category": "Engines",
+  "tags": "rocket engine raptor methane full flow staged combustion turbopump preburner nozzle test stand plume spacex animated anatomy",
+  "key": "re-theme",
+  "title": "Rocket Engine Test Stand",
+  "sceneLabel": "Line drawing of a full-flow staged-combustion methane rocket engine firing on a vertical test stand: on hover the turbopumps, preburners, ducts, nozzle and controller move apart",
+  "hotspotsLabel": "Engine parts",
+  "mark": "<b>Rocket Engine</b><span>Full-flow, on a test stand</span>",
+  "dwg": "DWG RE-001 &middot; Rev A<br>Units cm &middot; View az 35&deg; / el 12&deg;<br>After &ldquo;Raptor 2&rdquo; in Anatomy by Ryan (MIT); concept, not affiliated with SpaceX",
+  "template": "page-b"
+}

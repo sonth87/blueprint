@@ -1,0 +1,15 @@
+{
+  "id": "switch",
+  "label": "Nintendo Switch (OLED)",
+  "kind": "console",
+  "category": "Consoles",
+  "tags": "nintendo switch oled handheld console joy-con games portable",
+  "key": "nsw-theme",
+  "title": "Nintendo Switch (OLED)",
+  "sceneLabel": "Line drawing of the Nintendo Switch OLED model standing upright: on hover the Joy-Cons slide off and the glass, screen, frame, battery, board, cooling, back cover and kickstand move apart",
+  "hotspotsLabel": "Laptop parts",
+  "mark": "<b>Nintendo Switch</b><span>OLED model</span>",
+  "dwg": "DWG NSW-OLED-001 &middot; Rev A<br>Units mm &middot; View az 35&deg; / el 18&deg;<br>Concept page, not affiliated with Nintendo",
+  "template": "page-a",
+  "screenRuntime": true
+}

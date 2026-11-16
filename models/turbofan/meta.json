@@ -1,0 +1,14 @@
+{
+  "id": "turbofan",
+  "label": "TF-9 Turbofan",
+  "kind": "engine",
+  "category": "Engines",
+  "tags": "engine jet turbine aircraft",
+  "key": "tf9-theme",
+  "title": "TF-9 Turbofan",
+  "sceneLabel": "Line drawing of the TF-9 turbofan with a quarter of the casings cut away; the fan and the two spools turn, and the modules slide apart on hover",
+  "hotspotsLabel": "Engine parts",
+  "mark": "<b>TF-9</b><span>Turbofan engine</span>",
+  "dwg": "DWG TF9-GA-001 &middot; Rev A<br>Units mm &middot; View az 32&deg; / el 24&deg;",
+  "template": "page-b"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "pushbutton",
+  "label": "Push Button Circuit",
+  "kind": "circuit",
+  "category": "Instruments",
+  "tags": "push button switch circuit cell battery bulb spring contact electricity physics animated anatomy",
+  "key": "pb-theme",
+  "title": "Push Button Circuit",
+  "sceneLabel": "Line drawing of a push button wired in a loop with a cell and a bulb: the button presses, the copper bridge closes the gap between two posts and the bulb lights; on hover the cap, spring, cell and bulb move apart",
+  "hotspotsLabel": "Circuit parts",
+  "mark": "<b>Push Button</b><span>Circuit</span>",
+  "dwg": "DWG PB-001 &middot; Rev A<br>Units mm &middot; View az 42&deg; / el 28&deg;<br>After &ldquo;Push button&rdquo; in Anatomy by Ryan (MIT)",
+  "template": "page-b"
+}

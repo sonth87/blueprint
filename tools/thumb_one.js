@@ -4,7 +4,7 @@ with the masking done on a canvas in the browser, so it needs no Python or Pillo
 
     NODE_PATH=<dir with playwright-core> node tools/thumb_one.js <page.html> <out.webp> [--key <theme key>] [--selector <css>]
 
-A blueprint page (e.g. macmini/index.html, --key mm4-theme) is shot whole in its dark theme with the chrome hidden;
+A blueprint page (e.g. dist/m/macmini.html, --key mm4-theme; run npm run build:dist first, the page's scripts are relative so it opens from disk) is shot whole in its dark theme with the chrome hidden;
 with --selector only that element is shot (an Anatomy figure's stage). The shot becomes a white 960 x 720 WebP whose
 alpha is the lines' brightness, cropped to the drawing at 4:3 with a margin, so the grid can colour it with any theme.
 Chrome: CHROMIUM=path, default the macOS Google Chrome.

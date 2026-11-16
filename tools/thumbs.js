@@ -1,5 +1,5 @@
 /*
-Renders a thumbnail of every model in index.html for the home page's grid: the line drawing at the model's default
+Renders a thumbnail of every model (pages built from models/ + templates/) for the home page's grid: the line drawing at the model's default
 view, page chrome hidden, saved as a PNG of white lines on the dark theme. tools/thumbs.py then turns each into a
 WebP whose alpha is the lines (the fills that hide the back edges drop out), so the home page can colour them with
 any theme by using them as a CSS mask.
@@ -19,8 +19,11 @@ const REPO = path.join(__dirname, "..");
 const [, , OUT, ...only] = process.argv;
 if (!OUT) { console.error("usage: node tools/thumbs.js <out dir> [id ...]"); process.exit(1); }
 fs.mkdirSync(OUT, { recursive: true });
-const gallery = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
-const models = JSON.parse(gallery.match(/\n  const MODELS = (\[.*\]);\n/)[1]);
+const { load, entry } = require("./build.js");
+const { pageHtml } = require("../templates/page.js");
+const data = load();
+const models = data.models.map(m => ({ ...entry(m), html: pageHtml(data.templates[m.meta.template], m.meta,
+  { geometry: { code: m.geometry }, model: { code: m.model }, engine: { code: data.engine } }) }));
 const three = process.env.THREE_JS || require.resolve("three/build/three.min.js");
 const HIDE = `.page, .hint, .dwg, #hotspots, .sheet, .viewbar, .panpad, .flow, .exportbar, .tour, .detail, #tip, .bp-controls { display: none !important; }
   html, body { background: #000 !important; }`;

@@ -1,5 +1,5 @@
 /*
-Builds the blueprintspace npm package (packages/blueprintspace) from the gallery: every model page from index.html as
+Builds the blueprintspace npm package (packages/blueprintspace) from the gallery: every model page (built from models/ + templates/) as
 its own file (models/<id>.html), the grid's thumbnails (thumbs/<id>.webp), a manifest (models.json), and the
 <blueprint-model> web component (index.js, with index.d.ts) that embeds a model on any site. Re-run after adding or
 changing models:
@@ -19,8 +19,11 @@ const pkgPath = path.join(OUT, "package.json");
 const old = fs.existsSync(pkgPath) ? JSON.parse(fs.readFileSync(pkgPath, "utf8")) : {};
 const VERSION = process.argv[2] || old.version || "1.0.0";
 
-const gallery = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
-const models = JSON.parse(gallery.match(/\n  const MODELS = (\[.*\]);\n/)[1]);
+const { load, entry } = require("./build.js");
+const { pageHtml } = require("../templates/page.js");
+const data = load();
+const models = data.models.map(m => ({ ...entry(m), html: pageHtml(data.templates[m.meta.template], m.meta,
+  { geometry: { code: m.geometry }, model: { code: m.model }, engine: { code: data.engine } }) }));
 const manifest = models.map(({ id, label, kind, category, tags }) => ({ id, label, kind, category, tags }));
 
 for (const d of ["models", "thumbs"]) { fs.rmSync(path.join(OUT, d), { recursive: true, force: true }); fs.mkdirSync(path.join(OUT, d), { recursive: true }); }

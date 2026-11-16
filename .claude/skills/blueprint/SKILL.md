@@ -1,26 +1,28 @@
 ---
 name: blueprint
-description: Add a new interactive 3D blueprint model to this gallery (blueprintspace) — a real device, machine or vehicle generated in code with lib/procedural.js, rendered by the gallery's three.js engine as a line drawing that turns, takes apart, has labelled callouts and a "how it works" tour — then build its page, check it in headless Chrome, make its home-grid thumbnail and add it to index.html. Use whenever the user asks to draw, add, model or make a blueprint of a thing ("vẽ thêm cái Mac Studio", "add a Leica M6", "làm blueprint cái quạt"), to fix how a model looks, or to regenerate thumbnails. Also for turning a figure from somewhere else (an Anatomy figure, a photo, a drawing) into a model of this gallery: rebuild it in code here, never embed the other page.
+description: Add a new interactive 3D blueprint model to this gallery (blueprintspace) — a real device, machine or vehicle generated in code with kit/procedural.js, rendered by the gallery's shared three.js engine as a line drawing that turns, takes apart, has labelled callouts and a "how it works" tour — then add it to models/, build the gallery (dist/ for Vercel and the single-file index.html), check it in headless Chrome and make its home-grid thumbnail. Use whenever the user asks to draw, add, model or make a blueprint of a thing ("vẽ thêm cái Mac Studio", "add a Leica M6", "làm blueprint cái quạt"), to fix how a model looks, or to regenerate thumbnails. Also for turning a figure from somewhere else (an Anatomy figure, a photo, a drawing) into a model of this gallery: rebuild it in code here, never embed the other page.
 ---
 
 # Blueprint models for this gallery
 
-A model is two files in its own folder, generated geometry plus a page script, built into a page that is then
-inlined into the gallery's single `index.html`:
+A model is a folder `models/<id>/`; `tools/build.js` puts every page together from it, the shared engine
+(`engine/`) and a page template (`templates/page-a.html` or `page-b.html`, via `templates/page.js`). See README.md.
 
 | File | What it holds |
 |---|---|
-| `<id>/build.js` | The geometry in mm, made with `lib/procedural.js`; the `explode` offsets, `hotspots` and `tour`; the page assembly (`buildPage`) and the gallery entry (`addToGallery`). |
-| `<id>/model.js` | `window.BLUEPRINT_MODEL`: part descriptions (`detail`), materials for the Shaded/Photo styles, the camera `view`, `occluders`, and `setup(E)` for motion (fans, screens, keys). |
-| `<id>/index.html` | Written by the build: the page on its own. Never edit it. |
+| `models/<id>/build.js` | The geometry in mm, made with `kit/procedural.js`; the `explode` offsets, `hotspots` and `tour`. It ends with `writeGeometry(HERE, geometry)`. |
+| `models/<id>/geometry.js` | Written by `build.js` (`node models/<id>/build.js`, or `npm run geometry` for all). Never edit it. Models without a build.js (exported from Blender) keep only this file as data. |
+| `models/<id>/model.js` | `window.BLUEPRINT_MODEL`: part descriptions (`detail`), materials for the Shaded/Photo styles, the camera `view`, `occluders`, and `setup(E)` for motion (fans, screens, keys). |
+| `models/<id>/meta.json` | The gallery entry and the page's text: `id, label, kind, category, tags, key` (the theme's localStorage key, same as `themeKey` in model.js), `template`, `title, sceneLabel, hotspotsLabel, mark, dwg`, and `screenRuntime: true` when model.js uses `BP_screenAnimation`. |
+| `models/index.json` | The gallery's order. Add the id next to its category's other models so the picker groups stay together. |
 | `thumbs/<id>.webp` | The home grid's picture. The grid shows nothing without it. |
 
-Start from the closest existing model and read its two files first:
+Start from the closest existing model and read its `build.js`, `model.js` and `meta.json` first:
 
-- **Box with a fan** (desktop, console, appliance): `macmini/` (smallest, ~19 parts), `steam/`, `xbox/`, `egpu/`.
-- **Laptop or anything with a screen and keys**: `framework/` (keyboard, screen animation via `lib/screen-runtime.js`), `macbookpro/`.
-- **Handheld**: `gameboy/`, `playdate/`, `psp/`, `switch/`.
-- **Round / turned parts, pipes**: `v8/`, `hover/`, `spaceship/` (`revolve`, `tube`, `sweep`).
+- **Box with a fan** (desktop, console, appliance): `models/macmini/` (smallest, ~19 parts), `steam`, `xbox`, `egpu`.
+- **Laptop or anything with a screen and keys**: `framework` (keyboard, screen animation via `engine/screen-runtime.js`), `macbookpro`.
+- **Handheld**: `gameboy`, `playdate`, `psp`, `switch`.
+- **Round / turned parts, pipes**: `v8`, `hover`, `spaceship`, `raptor` (`revolve`, `tube`, `sweep`).
 
 ## Workflow
 
@@ -39,14 +41,14 @@ Start from the closest existing model and read its two files first:
 5. **Build the geometry** (API below), then `explode`, `hotspots` and `tour`.
 6. **Write `model.js`**: `detail` for every part name (title + one true sentence), `materials` (regex → preset), `view`,
    `occluders` (the big parts that hide others), `setup` for motion.
-7. **Build:** `node <id>/build.js`. It rewrites `<id>/index.html` and puts the model into `index.html`, after the
-   id passed to `addToGallery(entry, after)`, which must be in the same category so the picker groups stay together.
-   `index.html` is ~20 MB and the build overwrites it in place: copy it somewhere first if nothing else backs it up.
+7. **Write `meta.json`, add the id to `models/index.json`, build:** `node models/<id>/build.js && npm run build`.
+   That writes `dist/` (Vercel; gitignored) and the single-file `index.html` at the root (for opening from disk;
+   committed). The build checks every input first and writes nothing if something is missing.
 8. **Verify like a critic** (below). Fix and rebuild until every check passes.
-9. **Thumbnail:** `node tools/thumb_one.js <id>/index.html thumbs/<id>.webp --key <themeKey>`, then look at it next to
+9. **Thumbnail:** `node tools/thumb_one.js dist/m/<id>.html thumbs/<id>.webp --key <themeKey>`, then look at it next to
    its neighbours on the home grid.
 
-## Geometry API (`lib/procedural.js`)
+## Geometry API (`kit/procedural.js`)
 
 All 2D shapes are lists of triangles ("regions"); solids take a region and heights.
 
@@ -66,10 +68,11 @@ All 2D shapes are lists of triangles ("regions"); solids take a region and heigh
 the base for a spool part, as `local()` does in every build). `tour.points` are named surface points and `tour.steps`
 are `{ t, d, focus, dist, ex (0 together / 1 apart), p: [points], n: [parts to light], ms }`.
 
-Pages come from a template already in the gallery: `template: "cpu"` for models without a screen (`model.js` read on
-its own), `template: "spectre"` for models with a screen (prepend `lib/screen-runtime.js` to `model.js`). The swaps
-replace the title, the canvas `aria-label`, the `.mark`, the `.dwg` block (end it with "Concept page, not
-affiliated with <maker>" for real products) and, on `cpu`, the hotspots `aria-label`.
+Two page templates: `page-b` (most models) and `page-a` (the laptop-style chrome of framework, gameboy…); copy the
+choice of the model you started from. `meta.json` fills their slots: `title`, `sceneLabel` (the canvas
+`aria-label`), `hotspotsLabel`, `mark` (`<b>Name</b><span>Subtitle</span>`) and `dwg` (the drawing block; end it with
+"Concept page, not affiliated with <maker>" for real products). `screenRuntime: true` puts `engine/screen-runtime.js`
+before `model.js`.
 
 ## Craft rules
 
@@ -97,7 +100,7 @@ Learned on this gallery's models, plus the parts of Anatomy's craft that carry o
 Every check needs `playwright-core` and Chrome: `NODE_PATH=~/PROJECTS/crawl-svg-icon/node_modules` (or any folder
 holding `playwright-core`); `CHROMIUM=…` overrides the browser path. Put screenshots in the scratchpad, not the repo.
 
-1. `node tools/capture.js <id>/index.html <scratch>/cap --zoom x,y,3` → assembled, apart, apart without labels and a
+1. `node tools/capture.js dist/m/<id>.html <scratch>/cap --zoom x,y,3` → assembled, apart, apart without labels and a
    close-up, and it fails on any page error. **Read every PNG.** Check: the outline reads as the real object at 1×;
    nothing hidden apart that should show; every module separated; callout dots on their parts; the close-up has no
    bare face or loose line. If "apart" looks assembled, the explode didn't toggle: Space flips the current state.
@@ -109,8 +112,10 @@ holding `playwright-core`); `CHROMIUM=…` overrides the browser path. Put scree
 
 ## Not covered by a model build
 
-- `packages/blueprintspace/` (the npm package) is not updated by `build.js`; run `tools/build_package.js` and add the
-  model to its README table when the user wants it published.
+- `packages/blueprintspace/` (the npm package) is not updated by `npm run build`; run `node tools/build_package.js`
+  and add the model to its README table when the user wants it published.
+- Deploying: Vercel runs `node tools/build.js --dist` (vercel.json) and serves `dist/`; commit the sources, the
+  model's `geometry.js` and the rebuilt root `index.html`.
 - `tools/thumbs.js` + `tools/thumbs.py` rebuild every thumbnail but expect Linux paths and Pillow; on this Mac use
   `tools/thumb_one.js` per model.
 
@@ -118,7 +123,7 @@ holding `playwright-core`); `CHROMIUM=…` overrides the browser path. Put scree
 
 When the user points at another illustration (e.g. an Anatomy figure, github.com/wheresryan22/anatomy, MIT) and wants
 it here, they want a model of this gallery: read the source for the object, its parts, sizes and mechanism, then build
-it with `lib/procedural.js` like any other model. Do not embed or wrap the other page. Credit the source in the
+it with `kit/procedural.js` like any other model. Do not embed or wrap the other page. Credit the source in the
 `.dwg` block ("After “…” in Anatomy by Ryan (MIT)") and in the build's header comment. Skip subjects the gallery
 already has (Anatomy's desk computer is the Macintosh 128K again). `dialindicator/`, `pushbutton/` and `arcade/` were
 made this way and show the moving-part patterns below, along with `watch/`, `raptor/`, `rippletank/` (two animated
@@ -133,7 +138,7 @@ screens: the water and its focused shadow) and `combolock/` (Anatomy's "turning 
 - **Clamp dt:** `dt = Math.max(0, Math.min(dt, 1 / 30))`. The first frame's dt can be a hair below zero; a clock that
   goes negative indexed an array at −1 and froze the dial indicator's carriage at NaN (invisible, no error).
 - **Make a part glow** by raising its line material's `E.byName[name].mats[0].userData.base` (the push button's filament).
-- **Animated screens:** prepend `lib/screen-runtime.js` to `model.js` and call `BP_screenAnimation(E, { screen: G.screen,
+- **Animated screens:** set `screenRuntime: true` in meta.json and call `BP_screenAnimation(E, { screen: G.screen,
   part, width, height, always: true, draw })`; pass `G.screen` (origin, right, top corners) from the build. A filled
   part in front of the picture hides it: draw cover glass as lines only (the arcade's bezel glass).
 - **Mechanisms with state** (pick-up, latches, sequences): simulate once in `build.js`, pass the samples as

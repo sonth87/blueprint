@@ -1,0 +1,15 @@
+{
+  "id": "fridge",
+  "label": "Refrigerator",
+  "kind": "appliance",
+  "category": "Appliances",
+  "tags": "fridge refrigerator freezer french door appliance kitchen ice water dispenser compressor",
+  "key": "frg-theme",
+  "title": "Refrigerator",
+  "sceneLabel": "Line drawing of a stainless French-door refrigerator with a water and ice dispenser: on hover the doors and freezer drawer come away, the shelves and drawers slide out and the evaporator, compressor, condenser and fans move apart",
+  "hotspotsLabel": "Laptop parts",
+  "mark": "<b>Refrigerator</b><span>French door</span>",
+  "dwg": "DWG FRG-001 &middot; Rev A<br>Units cm &middot; View az 35&deg; / el 16&deg;<br>Concept design, generic parts",
+  "template": "page-a",
+  "screenRuntime": true
+}

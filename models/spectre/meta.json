@@ -1,0 +1,14 @@
+{
+  "id": "spectre",
+  "label": "Spectre x360 14",
+  "kind": "laptop",
+  "category": "Computers",
+  "tags": "laptop hp convertible notebook 2-in-1",
+  "key": "sx360-theme",
+  "title": "Spectre x360 14",
+  "sceneLabel": "Line drawing of the Spectre x360 14 convertible laptop, open at 110 degrees; on hover the lid, keyboard deck, cooling, mainboard, battery and bottom cover slide apart",
+  "hotspotsLabel": "Laptop parts",
+  "mark": "<b>Spectre x360</b><span>14-inch 2-in-1</span>",
+  "dwg": "DWG SX360-14-001 &middot; Rev A<br>Units mm &middot; View az 45&deg; / el 28&deg;<br>Concept page, not affiliated with HP",
+  "template": "page-a"
+}

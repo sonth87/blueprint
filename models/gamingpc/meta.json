@@ -1,0 +1,14 @@
+{
+  "id": "gamingpc",
+  "label": "Custom Gaming PC",
+  "kind": "desktop",
+  "category": "Computers",
+  "tags": "pc gaming custom build tower desktop rgb gpu cpu aio liquid cooling fans animated",
+  "key": "gpc-theme",
+  "title": "Custom Gaming PC",
+  "sceneLabel": "Line drawing of a custom gaming PC in a glass-sided tower, all ten fans turning: on hover the glass, front, radiator, graphics card, memory, pump and power supply move apart",
+  "hotspotsLabel": "PC parts",
+  "mark": "<b>Custom Gaming PC</b><span>ATX tower</span>",
+  "dwg": "DWG GPC-001 &middot; Rev A<br>Units mm &middot; View az 50&deg; / el 18&deg;<br>Concept build, generic parts",
+  "template": "page-b"
+}

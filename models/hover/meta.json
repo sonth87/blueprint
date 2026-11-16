@@ -1,0 +1,14 @@
+{
+  "id": "hover",
+  "label": "HV-9 Hover Hauler",
+  "kind": "vehicle",
+  "category": "Vehicles",
+  "tags": "vehicle hover hovercraft futuristic sci-fi spaceship ship hauler",
+  "key": "hv9-theme",
+  "title": "HV-9 Hover Hauler",
+  "sceneLabel": "Line drawing of the HV-9 hover hauler, a futuristic hover vehicle with its lift turbines and sensor turning: on hover the canopy, cockpit, deck, turbines, engine pods, fins and hover pads come apart",
+  "hotspotsLabel": "Vehicle parts",
+  "mark": "<b>HV-9</b><span>Hover hauler</span>",
+  "dwg": "DWG HV9-001 &middot; Rev B<br>Units cm &middot; View az 45&deg; / el 26&deg;<br>Concept design",
+  "template": "page-b"
+}

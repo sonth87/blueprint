@@ -1,0 +1,15 @@
+{
+  "id": "rippletank",
+  "label": "Ripple Tank",
+  "kind": "instrument",
+  "category": "Instruments",
+  "tags": "ripple tank waves water interference physics lab strobe diffraction animated anatomy",
+  "key": "rt-theme",
+  "title": "Ripple Tank",
+  "sceneLabel": "Line drawing of a ripple tank: two dippers make interfering ripples whose bright lines a strobe lamp throws onto the paper below; on hover the lamp, vibrator, tank and paper move apart",
+  "hotspotsLabel": "Ripple tank parts",
+  "mark": "<b>Ripple Tank</b><span>Interference</span>",
+  "dwg": "DWG RT-001 &middot; Rev A<br>Units mm &middot; View az 35&deg; / el 40&deg;<br>After &ldquo;Ripple tank&rdquo; in Anatomy by Ryan (MIT)",
+  "template": "page-b",
+  "screenRuntime": true
+}

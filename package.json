@@ -1,0 +1,14 @@
+{
+  "name": "blueprintspace-gallery",
+  "private": true,
+  "description": "A gallery of interactive 3D blueprint models rendered by one shared three.js engine.",
+  "scripts": {
+    "build": "node tools/build.js",
+    "build:dist": "node tools/build.js --dist",
+    "build:local": "node tools/build.js --local",
+    "geometry": "node tools/build-geometry.js",
+    "thumb": "node tools/thumb_one.js",
+    "capture": "node tools/capture.js"
+  },
+  "engines": { "node": ">=18" }
+}

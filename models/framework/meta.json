@@ -1,0 +1,15 @@
+{
+  "id": "framework",
+  "label": "Framework Laptop 13",
+  "kind": "laptop",
+  "category": "Computers",
+  "tags": "framework laptop 13 repairable modular expansion cards notebook linux",
+  "key": "fw13-theme",
+  "title": "Framework Laptop 13",
+  "sceneLabel": "Line drawing of the Framework Laptop 13 open at 110 degrees: on hover the expansion cards slide out, the input cover lifts off, the bezel pops forward and the mainboard, memory, SSD, fan, battery and bottom cover move apart",
+  "hotspotsLabel": "Laptop parts",
+  "mark": "<b>Framework Laptop 13</b><span>Repairable</span>",
+  "dwg": "DWG FW13-001 &middot; Rev A<br>Units mm &middot; View az 40&deg; / el 28&deg;<br>Concept page, not affiliated with Framework",
+  "template": "page-a",
+  "screenRuntime": true
+}

@@ -1,0 +1,14 @@
+{
+  "id": "rubiks",
+  "label": "Rubik's Cube",
+  "kind": "puzzle",
+  "category": "Toys",
+  "tags": "rubiks rubik cube puzzle toy 3x3 speedcube animated",
+  "key": "rc3-theme",
+  "title": "Rubik's Cube",
+  "sceneLabel": "Line drawing of a Rubik's Cube turning its layers, scrambling and solving itself: on hover the 26 pieces spread apart round the core",
+  "hotspotsLabel": "Cube parts",
+  "mark": "<b>Rubik's Cube</b><span>3 x 3 x 3</span>",
+  "dwg": "DWG RC3-001 &middot; Rev A<br>Units mm &middot; View az 45&deg; / el 30&deg;<br>Concept page, not affiliated with Rubik's",
+  "template": "page-b"
+}

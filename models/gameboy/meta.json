@@ -1,0 +1,15 @@
+{
+  "id": "gameboy",
+  "label": "Game Boy",
+  "kind": "console",
+  "category": "Consoles",
+  "tags": "game boy gameboy nintendo dmg handheld 1989 retro tetris cartridge",
+  "key": "gb-theme",
+  "title": "Game Boy",
+  "sceneLabel": "Line drawing of the original Nintendo Game Boy standing upright with a Game Pak in its slot: on hover the lens, screen, front shell, buttons, board, batteries and back shell move apart and the cartridge lifts out",
+  "hotspotsLabel": "Laptop parts",
+  "mark": "<b>Game Boy</b><span>DMG-01, 1989</span>",
+  "dwg": "DWG DMG-01-001 &middot; Rev A<br>Units mm &middot; View az 30&deg; / el 16&deg;<br>Concept page, not affiliated with Nintendo",
+  "template": "page-a",
+  "screenRuntime": true
+}

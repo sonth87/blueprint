@@ -1,0 +1,14 @@
+{
+  "id": "ps3",
+  "label": "PlayStation 3",
+  "kind": "console",
+  "category": "Consoles",
+  "tags": "console sony ps3 cell dualshock 3 sixaxis 2006 games blu-ray",
+  "key": "ps3-theme",
+  "title": "PlayStation 3",
+  "sceneLabel": "Line drawing of the launch PlayStation 3 with a DualShock 3; on hover the top shell lifts off, the Blu-ray drive, cooler, board and power supply come apart, the hard drive slides out and the controller opens up",
+  "hotspotsLabel": "Console parts",
+  "mark": "<b>PlayStation 3</b><span>CECHA &middot; 2006</span>",
+  "dwg": "DWG CECHA-01 &middot; Rev A<br>Units mm &middot; View az 45&deg; / el 25&deg;<br>Concept page, not affiliated with Sony",
+  "template": "page-b"
+}

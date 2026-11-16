@@ -1,5 +1,5 @@
 /*
-Screenshots of a model page for checking a build: assembled, taken apart (Space locks it apart), the same without
+Screenshots of a model page (dist/m/<id>.html, from `npm run build:dist`; it opens from disk) for checking a build: assembled, taken apart (Space locks it apart), the same without
 labels, and a close-up. Prints any page errors and exits 1 if there were some.
 
     NODE_PATH=<dir with playwright-core> node tools/capture.js <page.html> <out dir> [--zoom x,y,clicks]

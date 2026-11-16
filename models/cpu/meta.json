@@ -1,0 +1,14 @@
+{
+  "id": "cpu",
+  "label": "X9 Processor",
+  "kind": "chip",
+  "category": "Components",
+  "tags": "chip cpu desktop socket lga",
+  "key": "x9-theme",
+  "title": "X9 Processor",
+  "sceneLabel": "Line drawing of the X9 processor package: heat spreader, substrate with three dies, and LGA socket; on hover the lid lifts off and the socket drops away",
+  "hotspotsLabel": "Processor parts",
+  "mark": "<b>X9</b><span>Desktop processor</span>",
+  "dwg": "DWG CPU-X9-001 &middot; Rev A<br>Units mm &middot; View az 45&deg; / el 30&deg;",
+  "template": "page-b"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "egpu",
+  "label": "EG-1 eGPU",
+  "kind": "egpu",
+  "category": "Components",
+  "tags": "egpu external gpu graphics card enclosure thunderbolt fans pcie",
+  "key": "eg1-theme",
+  "title": "EG-1 eGPU",
+  "sceneLabel": "Line drawing of the EG-1 external GPU enclosure with its fans turning: on hover the shell lifts off, the mesh panel and end caps come away, the graphics card rises off the Thunderbolt board and the power supply slides out",
+  "hotspotsLabel": "eGPU parts",
+  "mark": "<b>EG-1</b><span>External GPU enclosure</span>",
+  "dwg": "DWG EG1-001 &middot; Rev A<br>Units mm &middot; View az 45&deg; / el 26&deg;<br>Concept design",
+  "template": "page-b"
+}

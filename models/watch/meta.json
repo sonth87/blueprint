@@ -1,0 +1,14 @@
+{
+  "id": "watch",
+  "label": "Watch Movement",
+  "kind": "mechanism",
+  "category": "Instruments",
+  "tags": "watch movement mechanical clock balance wheel escapement hairspring gear train mainspring jewels horology animated anatomy",
+  "key": "wm-theme",
+  "title": "Watch Movement",
+  "sceneLabel": "Line drawing of a mechanical watch movement running: the balance swings, the pallet fork flips and the escape wheel steps; on hover the bridges, balance, escapement and wheels lift off the main plate in layers",
+  "hotspotsLabel": "Movement parts",
+  "mark": "<b>Watch Movement</b><span>Manual wind</span>",
+  "dwg": "DWG WM-001 &middot; Rev A<br>Units mm &middot; View az 30&deg; / el 42&deg;<br>After &ldquo;Watch movement&rdquo; in Anatomy by Ryan",
+  "template": "page-b"
+}

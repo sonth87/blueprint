@@ -1,0 +1,15 @@
+{
+  "id": "gbconcept",
+  "label": "Game Boy Concept",
+  "kind": "console",
+  "category": "Consoles",
+  "tags": "game boy concept translucent smoke redesign handheld modern purple",
+  "key": "gbc-theme",
+  "title": "Game Boy Concept",
+  "sceneLabel": "Line drawing of a modern Game Boy concept in smoked translucent plastic, a square screen over its controls: on hover the screen unit lifts away and the buttons, board, battery and back plate move apart",
+  "hotspotsLabel": "Laptop parts",
+  "mark": "<b>Game Boy Concept</b><span>Translucent redesign</span>",
+  "dwg": "DWG GBC-001 &middot; Rev A<br>Units mm &middot; View az 25&deg; / el 14&deg;<br>Concept design, modelled from a render, not affiliated with Nintendo",
+  "template": "page-a",
+  "screenRuntime": true
+}

@@ -1,0 +1,14 @@
+{
+  "id": "macbookpro",
+  "label": "MacBook Pro 14 (M5)",
+  "kind": "laptop",
+  "category": "Computers",
+  "tags": "laptop apple macbook pro m5 notebook 2025",
+  "key": "mbp14-theme",
+  "title": "MacBook Pro 14 (M5)",
+  "sceneLabel": "Line drawing of the 14-inch MacBook Pro with M5, open at 110 degrees; on hover the display, keyboard, trackpad, speakers, cooling, logic board, battery and bottom case slide apart",
+  "hotspotsLabel": "Laptop parts",
+  "mark": "<b>MacBook Pro</b><span>14-inch, M5</span>",
+  "dwg": "DWG MBP14-M5-001 &middot; Rev A<br>Units mm &middot; View az 45&deg; / el 28&deg;<br>Concept page, not affiliated with Apple",
+  "template": "page-a"
+}

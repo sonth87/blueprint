@@ -1,0 +1,15 @@
+{
+  "id": "steam",
+  "label": "Steam Machine",
+  "kind": "console",
+  "category": "Consoles",
+  "tags": "steam machine valve console pc gaming steamos fan led",
+  "key": "stm-theme",
+  "title": "Steam Machine",
+  "sceneLabel": "Line drawing of the Steam Machine with its fan turning and light strip glowing: on hover the shell lifts, the front panel and fan come forward, the back comes off and the fin stack, board and power supply move apart",
+  "hotspotsLabel": "Console parts",
+  "mark": "<b>Steam Machine</b><span>Console</span>",
+  "dwg": "DWG STM-001 &middot; Rev A<br>Units mm &middot; View az 40&deg; / el 22&deg;<br>Concept page, not affiliated with Valve",
+  "template": "page-b",
+  "screenRuntime": true
+}

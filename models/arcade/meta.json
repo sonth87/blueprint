@@ -1,0 +1,15 @@
+{
+  "id": "arcade",
+  "label": "Arcade Cabinet",
+  "kind": "machine",
+  "category": "Consoles",
+  "tags": "arcade cabinet upright coin op crt joystick retro game machine animated anatomy",
+  "key": "ac-theme",
+  "title": "Arcade Cabinet",
+  "sceneLabel": "Line drawing of an upright arcade cabinet: a coin drops through the coin mechanism, rolls past the coin switch into the cash box, and the screen gives a credit; on hover the side, back, bezel, monitor, control panel and coin door come away",
+  "hotspotsLabel": "Cabinet parts",
+  "mark": "<b>Arcade Cabinet</b><span>Upright</span>",
+  "dwg": "DWG AC-001 &middot; Rev A<br>Units mm &middot; View az 35&deg; / el 18&deg;<br>After &ldquo;Arcade cabinet&rdquo; in Anatomy by Ryan (MIT)",
+  "template": "page-b",
+  "screenRuntime": true
+}

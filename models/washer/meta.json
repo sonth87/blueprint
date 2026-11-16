@@ -1,0 +1,15 @@
+{
+  "id": "washer",
+  "label": "Washing Machine",
+  "kind": "appliance",
+  "category": "Appliances",
+  "tags": "washing machine washer laundry front loader drum spin appliance",
+  "key": "wsh-theme",
+  "title": "Washing Machine",
+  "sceneLabel": "Line drawing of a front-loading washing machine: on hover the door, front and control panel come away, the drum slides out of the tub and the motor, springs, counterweight, heater and pump move apart",
+  "hotspotsLabel": "Laptop parts",
+  "mark": "<b>Washing Machine</b><span>Front loader</span>",
+  "dwg": "DWG WSH-001 &middot; Rev A<br>Units mm &middot; View az 35&deg; / el 18&deg;<br>Concept design, generic parts",
+  "template": "page-a",
+  "screenRuntime": true
+}

@@ -1,0 +1,14 @@
+{
+  "id": "macmini",
+  "label": "Mac mini (M4)",
+  "kind": "desktop",
+  "category": "Computers",
+  "tags": "mac mini m4 apple desktop small computer 2024 fan",
+  "key": "mm4-theme",
+  "title": "Mac mini (M4)",
+  "sceneLabel": "Line drawing of the Mac mini with the M4 chip, its fan turning: on hover the enclosure lifts off, the power supply rises, the SSD module slides out and the cooling, fan and bottom cover drop away under the logic board",
+  "hotspotsLabel": "Mac mini parts",
+  "mark": "<b>Mac mini</b><span>M4, 2024</span>",
+  "dwg": "DWG MM4-001 &middot; Rev A<br>Units mm &middot; View az 40&deg; / el 24&deg;<br>Concept page, not affiliated with Apple",
+  "template": "page-b"
+}
