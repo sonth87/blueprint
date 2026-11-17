@@ -82,8 +82,11 @@ function buildDist(d, out = R("dist")) {
     fs.writeFileSync(path.join(out, "models", m.id + ".geometry.js"), m.geometry);
     fs.writeFileSync(path.join(out, "models", m.id + ".model.js"), m.model);
   }
-  fs.writeFileSync(path.join(out, "index.html"), shell(d, d.models.map(m => ({ ...entry(m), src: "viewer.html?model=" + encodeURIComponent(m.id) })), "", "", "", ""));
-  for (const dir of ["thumbs", "docs"]) if (fs.existsSync(R(dir))) fs.cpSync(R(dir), path.join(out, dir), { recursive: true });
+  const site = process.env.SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? "https://" + process.env.VERCEL_PROJECT_PRODUCTION_URL : "");
+  let home = shell(d, d.models.map(m => ({ ...entry(m), src: "viewer.html?model=" + encodeURIComponent(m.id) })), "", "", "", "");
+  if (site) home = home.replace('content="brand/og.png"', 'content="' + site.replace(/\/$/, "") + '/brand/og.png"');
+  fs.writeFileSync(path.join(out, "index.html"), home);
+  for (const dir of ["thumbs", "docs", "brand"]) if (fs.existsSync(R(dir))) fs.cpSync(R(dir), path.join(out, dir), { recursive: true });
   return out;
 }
 
