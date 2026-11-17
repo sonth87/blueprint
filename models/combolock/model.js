@@ -29,6 +29,8 @@
     view: { az: 145, el: 24, fit: 1.3 },   // the door is lines only, so the framing (from filled parts) leaves it out: stand further back
     spoolOf: o => o.spool || null,
     occluders: ["Lock Case", "Back Cover", "Dial", "Wheel 1", "Wheel 2", "Wheel 3", "Drive Cam", "Bolt"],
+    // parts drawn only as lines that stay lines in the shaded and photo styles (an effect, not a surface)
+    fxLines: [/^Door Section$/],
     hotspots: G.hotspots.map(h => ({ t: h.t, s: h.s, p: h.p, o: h.o })),
     detail: DETAIL,
     tour: G.tour,

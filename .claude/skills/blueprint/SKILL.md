@@ -93,6 +93,12 @@ Learned on this gallery's models, plus the parts of Anatomy's craft that carry o
 - **Callouts are true and short**: title in a few words, subtitle one fact. The tour follows the mechanism (air in →
   heat → out, or input → process → output), five to seven steps.
 - **One accent of motion.** A fan turning, a screen running, keys pressing. Respect `E.reduceMotion`.
+- **Print the name on every named chip** (user rule, 2026-11-17). When a part is a chip with a name (H2, M4, M5, A19, AMD, Cell, RSX...), its
+  top face carries that name as printed text, visible when zoomed in. Build it with `textMark(part, text, x0, x1, y0, y1, z, {T, out})`
+  from `kit/procedural.js` and pass the result in `marks` of `geometryScript`'s extras (`marks: [...]`). `z` is the chip's outward face and
+  `out` the way it faces (`[0,0,1]` up, `[0,0,-1]` down); use the die/package footprint so the text fits inside it and sits clear of dies
+  stacked above. The chip must face the side people look from: a chip pointing into a shell is only readable from behind. Check the mark
+  zoomed in Lines and Shaded (and mirrored parts, via `T`).
 - **Real products:** the honest shape and layout, no logos copied as artwork, and the "not affiliated" line.
 
 ## Verify
@@ -141,6 +147,12 @@ screens: the water and its focused shadow) and `combolock/` (Anatomy's "turning 
 - **Animated screens:** set `screenRuntime: true` in meta.json and call `BP_screenAnimation(E, { screen: G.screen,
   part, width, height, always: true, draw })`; pass `G.screen` (origin, right, top corners) from the build. A filled
   part in front of the picture hides it: draw cover glass as lines only (the arcade's bezel glass).
+- **Effects drawn as lines vanish in Shaded and Photo.** Those styles replace every line with surfaces, so a part with
+  no triangles (a stream of molten steel, an arc, a gas jet, bubbles, a liquid level drawn as loops) disappears. List
+  such parts in `fxLines` in model.js: names or patterns (`/^Arc L\d$/`) to keep them as lines, or `{ match, color }`
+  to tint them (`color: 0xff9a2e` for molten steel); the line drawing keeps the page's line colour. Do this for every
+  part that carries a moving or glowing effect; check the model in all three styles (`SP/styles.js`-style screenshots:
+  click `.bp-style button[data-s=realistic]` / `photo`).
 - **Mechanisms with state** (pick-up, latches, sequences): simulate once in `build.js`, pass the samples as
   constants and play them back in `model.js`, so geometry and motion come from the same run (`combolock/`: the gates
   are drawn where the simulation leaves each wheel at the moment it opens). True rates beat pretty ones: the watch's

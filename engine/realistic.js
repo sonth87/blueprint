@@ -372,7 +372,7 @@
     }
     // a theme change while in the Photo style re-dresses the set
     const recolorBase = window.__bpRecolor;
-    window.__bpRecolor = () => { recolorBase(); if (photoBuilt) look(); };
+    window.__bpRecolor = () => { recolorBase(); tintFx(); if (window.__bpMarks) window.__bpMarks(style); if (photoBuilt) look(); };
     // the seamless paper: lighter round the model and towards the light, deepening to the corners
     function backdropTexture([light, deep]) {
       const c = document.createElement("canvas"); c.width = c.height = 1024;
@@ -473,12 +473,28 @@
       look();
     }
 
+    // The shaded and photo styles swap the line drawing for surfaces. A part drawn only as lines (a stream of molten steel,
+    // an arc, a jet of gas) has no surface to shade, so the model lists it in M.fxLines and it stays as lines in every
+    // style. An entry is a name or a pattern, or { match, color } to draw those lines in that colour in the shaded and
+    // photo styles (molten steel in orange, an arc in blue-white); the line drawing keeps the page's line colour.
+    const fxList = (M.fxLines || []).map(f => f && f.match !== undefined ? f : { match: f });
+    const partOf = o => { for (let q = o.parent; q; q = q.parent) if (q.userData && q.userData.name) return q.userData.name; return ""; };
+    const fxOf = o => {
+      if (!fxList.length || (o.material && o.material.depthFunc === THREE.GreaterDepth)) return null;   // not the hidden-edge lines
+      const name = partOf(o);
+      return fxList.find(f => f.match instanceof RegExp ? f.match.test(name) : f.match === name) || null;
+    };
+    const keepLines = o => !!fxOf(o);
+    function tintFx() {
+      if (style === "blueprint" || !fxList.length) return;
+      scene.traverse(o => { if ((o.isLineSegments || o.isLine) && o.material && o.material.color) { const f = fxOf(o); if (f && f.color !== undefined) o.material.color.setHex(f.color); } });
+    }
     function apply() {
       const real = style !== "blueprint", photo = style === "photo";
       if (style === "realistic" && !built) build();
       if (photo && !photoBuilt) buildPhoto();
       fillMat.visible = !real;
-      scene.traverse(o => { if ((o.isLineSegments || o.isLine) && !(o.material && o.material.isShaderMaterial)) o.visible = !real; });
+      scene.traverse(o => { if ((o.isLineSegments || o.isLine) && !(o.material && o.material.isShaderMaterial)) o.visible = !real || keepLines(o); });
       reals.forEach(x => { x.r.visible = style === "realistic"; });
       photos.forEach(x => { x.r.visible = photo; });
       lights.forEach(l => { l.visible = style === "realistic"; });

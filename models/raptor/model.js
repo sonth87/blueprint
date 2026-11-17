@@ -42,6 +42,8 @@
     view: { az: 35, el: 12 },
     spoolOf: o => o.spool || null,
     occluders: ["Stand Columns", "Deck", "Crosshead", "Main Chamber", "Nozzle", "Oxygen Turbopump", "Methane Turbopump", "Engine Controller", "Flame Deflector"],
+    // parts drawn only as lines that stay lines in the shaded and photo styles (an effect, not a surface)
+    fxLines: [{ match: /^Exhaust Plume$/, color: 0xff9a4a }],
     hotspots: G.hotspots.map(h => ({ t: h.t, s: h.s, p: h.p, o: h.o })),
     detail: DETAIL,
     tour: G.tour,

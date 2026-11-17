@@ -13,7 +13,7 @@ Writes models/macmini/geometry.js.
 */
 "use strict";
 const { withFrame, part, line, loop, rrPts, circlePts, rrRegion, rect, fanRegion, stripRegion, extrude, rrBody, cyl, revolve, tube,
-  r3, geometryScript, writeGeometry } = require("../../kit/procedural");
+  r3, geometryScript, writeGeometry, textMark } = require("../../kit/procedural");
 
 const HERE = __dirname;
 const FY = q => [q[0], q[2], q[1]];            // draws in (x, z) on the front, pushes along y
@@ -178,6 +178,6 @@ const tour = {
   ],
 };
 
-const geometry = geometryScript("MM4_GEOMETRY", "macmini/build.js", { explode, hotspots, tour, constants: { HW, H } });
+const geometry = geometryScript("MM4_GEOMETRY", "macmini/build.js", { marks: [textMark("M4 Chip", "M4", -7, -1, 0.5, 7.5, 16.55, { out: [0, 0, -1] })], explode, hotspots, tour, constants: { HW, H } });
 writeGeometry(HERE, geometry);
 console.log(`models/macmini/geometry.js: ${geometry.stats}`);

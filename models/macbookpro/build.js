@@ -12,7 +12,7 @@ Writes models/macbookpro/geometry.js.
 */
 "use strict";
 const { withFrame, part, loop, rrPts, circlePts, rrRegion, rect, fanRegion, stripRegion, extrude, sheet, rrBody, cyl,
-  sweep, holeWalls, r3, geometryScript, writeGeometry } = require("../../kit/procedural");
+  sweep, holeWalls, r3, geometryScript, writeGeometry, textMark } = require("../../kit/procedural");
 
 const HERE = __dirname;
 
@@ -224,7 +224,7 @@ const flow = {
 const screen = { module: "display", origin: L(-SCREEN.x, SCREEN.u0, -2.9), right: L(SCREEN.x, SCREEN.u0, -2.9),
   top: L(-SCREEN.x, SCREEN.u1 - SCREEN.notch[1], -2.9) };   // the 16:10 area below the notch and menu bar
 
-const geometry = geometryScript("MBP_GEOMETRY", "macbookpro/build.js", { explode, hotspots, keys: keys.map(k => [...r3(k.slice(0, 4)), k[4]]),
+const geometry = geometryScript("MBP_GEOMETRY", "macbookpro/build.js", { marks: [textMark("M5", "M5", -12, 0, 53, 63, 5.2)], explode, hotspots, keys: keys.map(k => [...r3(k.slice(0, 4)), k[4]]),
   keyTop: KEY_TOP, touchpad: [0, -60.4, 145, 80], flow, screen,
   constants: { BASE_HW: HW, BASE_HH: HH, DECK, LID_TILT, HINGE_Y, HINGE_Z } });
 writeGeometry(HERE, geometry);

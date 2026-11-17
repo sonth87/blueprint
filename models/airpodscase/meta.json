@@ -1,0 +1,13 @@
+{
+  "id": "airpodscase",
+  "label": "AirPods Pro Case",
+  "kind": "charging case",
+  "category": "Audio",
+  "tags": "airpods pro charging case earbuds lid hinge magsafe qi usb-c find my speaker wireless charging apple",
+  "key": "apc-theme",
+  "title": "AirPods Pro Case",
+  "sceneLabel": "Line drawing of the AirPods Pro charging case with its two earbuds: on hover the lid swings open on its hinge, the earbuds fly up out of their wells, and the case and each earbud come apart into their components",
+  "hotspotsLabel": "AirPods Pro case parts",
+  "mark": "<b>AirPods Pro Case</b><span>Open: earbuds fly out</span>",
+  "dwg": "DWG APC-001 &middot; Rev A<br>Units mm &middot; View az 32&deg; / el 20&deg;<br>Concept page, not affiliated with Apple"
+}
