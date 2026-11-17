@@ -335,7 +335,27 @@ function writeGeometry(dir, geometry) {
   fs.writeFileSync(path.join(dir, "geometry.js"), geometry.js);
 }
 
+// Text printed on a flat patch of a part (the name on a chip, a rating on a battery): a "mark" for the engine (see "printed marks"
+// in engine/engine.js). The patch is x0..x1 by y0..y1 at height z of a frame, and faces `out` in that frame (the way
+// the part's surface faces: [0, 0, 1] up, [0, 0, -1] down). T maps that frame to the model's coordinates (give it when the part is
+// drawn inside withFrame, or placed and mirrored like the earbuds). The corners come out so the text reads right seen from outside,
+// whatever T does, even a mirror. Put the marks of a model in the `marks` field of geometryScript's extras.
+function textMark(part, text, x0, x1, y0, y1, z, { T = q => q, out = [0, 0, 1], color, minPx } = {}) {
+  const P = (x, y) => T([x, y, z]);
+  const sub = (a, b) => a.map((v, i) => v - b[i]);
+  const n = sub(T([out[0], out[1], z + out[2]]), P(0, 0));
+  let o = P(x0, y0), r = P(x1, y0), t = P(x0, y1);
+  const u = sub(r, o), v = sub(t, o);
+  const c = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]];
+  if (c[0] * n[0] + c[1] * n[1] + c[2] * n[2] < 0) { o = P(x1, y0); r = P(x0, y0); t = P(x1, y1); }   // seen from outside it would read backwards: start from the other end
+  const m = { part, text, origin: r3(o), right: r3(r), top: r3(t) };
+  if (color) m.color = color;
+  if (minPx) m.minPx = minPx;
+  return m;
+}
+
 module.exports = {
+  textMark,
   SCALE, read, withFrame, part, line, tri, loop, rrPts, circlePts, rrRegion, rect, squareRing, polyRegion, fanRegion, stripRegion,
   boundary, extrude, sheet, loft, rrBody, cyl, revolve, sweep, tube, holeWalls, r3, geometryScript, writeGeometry,
 };

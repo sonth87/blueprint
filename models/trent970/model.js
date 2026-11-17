@@ -74,6 +74,8 @@
     view: { az: 30, el: 20, fit: 0.72 },
     spoolOf: o => o.spool || null,
     occluders: ["Concrete Pad", "Fixed Frame", "Intake Cowl", "Fan Cowl", "Thrust Reverser Sleeve", "Core Cowl", "Pylon", "Live Frame", "Strongback", "Fan Blades"],
+    // parts drawn only as lines that stay lines in the shaded and photo styles (an effect, not a surface)
+    fxLines: [{ match: /^(Intake Air [ABC]|Bypass Wind [ABC])$/, color: 0xa8d4ff }, { match: /^Core Jet [ABC]$/, color: 0xffa04a }, /^(LP Shaft|IP Shaft|HP Shaft|IP Compressor Drum|HP Compressor Drum)$/],
     hotspots: G.hotspots.map(h => ({ t: h.t, s: h.s, p: h.p, o: h.o })),
     detail: DETAIL,
     tour: G.tour,

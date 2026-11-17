@@ -130,6 +130,8 @@
     view: { az: 40, el: 24, fit: 0.7 },
     spoolOf: o => o.spool || null,
     occluders: ["Baseplate", "Motor Frame", "Volute Casing", "Drum Shell", "Strainer Body", "Check Valve Body", "Globe Valve Body", "LCS Enclosure", "Bearing Housing"],
+    // parts drawn only as lines that stay lines in the shaded and photo styles (an effect, not a surface)
+    fxLines: [{ match: /^Vapour Sheets [SML]$/, color: 0xbfe6ff }, { match: /^(Drum Liquid|Heel Liquid)$/, color: 0xe3a23a }, /^Gauge Flags$/],
     hotspots: G.hotspots.map(h => ({ t: h.t, s: h.s, p: h.p, o: h.o })),
     detail: DETAIL,
     tour: G.tour,

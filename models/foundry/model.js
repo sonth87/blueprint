@@ -93,6 +93,8 @@
     view: { az: 35, el: 22, fit: 0.8 },
     spoolOf: o => o.spool || null,
     occluders: ["Ladle Shell", "Refractory Lining", "Gearbox Housing", "Gearbox Cover", "Front Frame", "Rear Frame", "Drag Flask", "Cope Flask", "Pouring Basin", "Pyrometer Body", "Counterweight Block"],
+    // parts drawn only as lines that stay lines in the shaded and photo styles (an effect, not a surface)
+    fxLines: [{ match: /^(Steel Bath|Basin Steel|Sprue Steel|Gating Steel|Casting Steel|Hub Steel|Riser Steel)$/, color: 0xff9a2e }, { match: /^Stream$/, color: 0xffc766 }, { match: /^Aiming Beam$/, color: 0xff3b30 }, /^(Slag Line|Drag Sand|Cope Sand)$/],
     hotspots: G.hotspots.map(h => ({ t: h.t, s: h.s, p: h.p, o: h.o })),
     detail: DETAIL,
     tour: G.tour,

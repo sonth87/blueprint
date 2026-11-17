@@ -35,6 +35,8 @@
     view: { az: 42, el: 28 },
     spoolOf: o => o.spool || null,
     occluders: ["Bench Plate", "Switch Base", "Cell", "Bulb", "Cap", "Frame"],
+    // parts drawn only as lines that stay lines in the shaded and photo styles (an effect, not a surface)
+    fxLines: [{ match: /^Filament$/, color: 0xffc060 }],
     hotspots: G.hotspots.map(h => ({ t: h.t, s: h.s, p: h.p, o: h.o })),
     detail: DETAIL,
     tour: G.tour,

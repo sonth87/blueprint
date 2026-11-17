@@ -1,0 +1,13 @@
+{
+  "id": "airpodspro",
+  "label": "AirPods Pro Earbud",
+  "kind": "earbud",
+  "category": "Audio",
+  "tags": "airpods pro earbud earphone wireless audio driver h2 anc microphone silicone tip apple",
+  "key": "app-theme",
+  "title": "AirPods Pro Earbud",
+  "sceneLabel": "Line drawing of one AirPods Pro earbud with sound waves leaving the nozzle and the driver's diaphragm moving: on hover the ear tip, nozzle, front shell, driver and back shell slide apart along the nozzle's axis, and the boards, battery, antenna, force sensor, stem shell and charging contacts slide away from the stem",
+  "hotspotsLabel": "AirPods Pro earbud parts",
+  "mark": "<b>AirPods Pro</b><span>Earbud, exploded</span>",
+  "dwg": "DWG APP-001 &middot; Rev A<br>Units mm &middot; View az 35&deg; / el 20&deg;<br>Concept page, not affiliated with Apple"
+}

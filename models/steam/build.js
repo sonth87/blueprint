@@ -14,7 +14,7 @@ Writes models/steam/geometry.js.
 */
 "use strict";
 const { withFrame, part, line, loop, rrPts, circlePts, rrRegion, rect, squareRing, stripRegion, extrude, rrBody, cyl, revolve, tube,
-  r3, geometryScript, writeGeometry } = require("../../kit/procedural");
+  r3, geometryScript, writeGeometry, textMark } = require("../../kit/procedural");
 
 const HERE = __dirname;
 const FY = q => [q[0], q[2], q[1]];   // draws in (x, z) and pushes along y
@@ -170,6 +170,6 @@ const tour = {
 };
 const ledPanel = { module: "front", origin: [-LED.x, -HD - 1.85, LED.z - LED.h], right: [LED.x, -HD - 1.85, LED.z - LED.h], top: [-LED.x, -HD - 1.85, LED.z + LED.h] };
 
-const geometry = geometryScript("STM_GEOMETRY", "steam/build.js", { explode, hotspots, tour, ledPanel, constants: { HW, HD, H } });
+const geometry = geometryScript("STM_GEOMETRY", "steam/build.js", { marks: [textMark("AMD Processor", "AMD", -12, 12, 5.5, 11, BZ + 1.4)], explode, hotspots, tour, ledPanel, constants: { HW, HD, H } });
 writeGeometry(HERE, geometry);
 console.log(`models/steam/geometry.js: ${geometry.stats}`);

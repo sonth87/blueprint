@@ -75,6 +75,8 @@
     view: { az: 18, el: 24, fit: 1.0 },
     spoolOf: o => o.spool || null,
     occluders: ["Front Wall", "Back Wall", "Side Walls", "Deck Top", "Panel Plate", "Plinth", "Horn Bell", "Amp Board"],
+    // parts drawn only as lines that stay lines in the shaded and photo styles (an effect, not a surface)
+    fxLines: [/^(Belt Pulse \d|Horn Relief|Side Fretwork)$/],
     hotspots: G.hotspots.map(h => ({ t: h.t, s: h.s, p: h.p, o: h.o })),
     detail: DETAIL,
     tour: G.tour,

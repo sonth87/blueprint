@@ -471,6 +471,65 @@
   const extras = (M.setup && M.setup(E)) || {};
   E.extras = extras;
 
+  // ---------- printed marks: the name on a chip, a rating on a battery ----------
+  // G.marks (or M.marks) lists { part, text, origin, right, top, color?, minPx? }: text printed on a flat patch of a part, like the
+  // laser marking on a real chip. origin, right and top are the patch's bottom-left, bottom-right and top-left corners in the
+  // part's own coordinates (as G.screen's); right x top must point out of the part. The text may have several lines ("\n").
+  // It is drawn in the page's line colour in the line drawing and in `color` (default light grey) in the shaded and photo
+  // styles, moves and fades with its part, and fades in as the camera comes close (when it is wider than about 30 px on the screen).
+  const markMats = [], marks = [];
+  (G.marks || M.marks || []).forEach(k => {
+    const pg = partGroups[k.part];
+    if (!pg || !k.text) return;
+    const p0 = toThree(...k.origin), pr = toThree(...k.right), pt = toThree(...k.top);
+    const u = pr.clone().sub(p0), v = pt.clone().sub(p0), w = u.length(), h = v.length();
+    const lift = u.clone().cross(v).normalize().multiplyScalar(Math.max(0.015, w * 0.006));
+    const pq = pr.clone().add(pt).sub(p0);
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.Float32BufferAttribute([p0, pr, pq, pt].flatMap(q => q.clone().add(lift).toArray()), 3));
+    geo.setAttribute("uv", new THREE.Float32BufferAttribute([0, 0, 1, 0, 1, 1, 0, 1], 2));
+    geo.setIndex([0, 1, 2, 0, 2, 3]);
+    const cv = document.createElement("canvas");
+    cv.width = 512; cv.height = Math.max(64, Math.min(1024, Math.round(512 * h / w)));
+    const tex = new THREE.CanvasTexture(cv);
+    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, side: THREE.DoubleSide, depthWrite: false });
+    mat.userData = { base: 0, k: 1, target: 1 };
+    mat.opacity = 0;
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.renderOrder = 3; mesh.raycast = () => {};
+    pg.add(mesh);
+    byName[k.part].mats.push(mat); markMats.push(mat);
+    marks.push({ k, cv, tex, mat, mesh, w, centre: p0.clone().add(pr).add(pt).add(pq).multiplyScalar(0.25), world: new THREE.Vector3() });
+  });
+  function paintMarks(style, fg) {
+    const real = style !== "blueprint";
+    marks.forEach(m => {
+      const ctx = m.cv.getContext("2d"), W = m.cv.width, H = m.cv.height, lines = String(m.k.text).split("\n");
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = real ? (m.k.color || "#cfd2d6") : fg;
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      let size = H * 0.8 / lines.length;
+      const font = n => "600 " + n + "px 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace";
+      ctx.font = font(size);
+      const widest = Math.max(...lines.map(l => ctx.measureText(l).width));
+      if (widest > W * 0.9) { size *= W * 0.9 / widest; ctx.font = font(size); }
+      lines.forEach((l, i) => ctx.fillText(l, W / 2, H * (i + 0.5) / lines.length));
+      m.tex.encoding = renderer.outputEncoding; m.tex.needsUpdate = true; m.mat.needsUpdate = true;
+    });
+  }
+  window.__bpMarks = style => { if (marks.length) paintMarks(style || "blueprint", getComputedStyle(root).getPropertyValue("--fg").trim() || "#ffffff"); };
+  window.__bpMarks("blueprint");
+  const markFade = () => {   // a mark shows once it is wide enough on the screen to be read
+    if (!marks.length) return;
+    const pxPerUnit = innerHeight / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
+    marks.forEach(m => {
+      m.world.copy(m.centre); m.mesh.localToWorld(m.world);
+      const px = m.w * pxPerUnit / Math.max(1e-6, m.world.distanceTo(camera.position)), min = m.k.minPx || 30;
+      m.mat.userData.base = Math.max(0, Math.min(1, (px - min) / (min * 0.8)));
+    });
+  };
+
   // ---------- "how it works" ----------
   // Models with a keyboard bring their own interactive version; the others play a guided tour (M.tour)
   // that zooms onto each stage in turn while a dashed line follows the path through the parts.
@@ -1758,7 +1817,8 @@
     const fg = lineMats[0].color;
     if (extras.tick) extras.tick(now, dt, e, fg);
     flow.tick(now, fg);
-    lineMats.concat(extras.mats || []).forEach(m => {
+    markFade();
+    lineMats.concat(extras.mats || [], markMats).forEach(m => {
       const u = m.userData;
       u.k += (u.target - u.k) * 0.15;
       m.opacity = Math.min(1, u.base * u.k);
